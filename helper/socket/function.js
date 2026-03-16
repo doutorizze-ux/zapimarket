@@ -71,7 +71,11 @@ function extractObjFromChatId(str) {
 }
 
 async function getSessionIdFromChatIdQr(str) {
-  const obj = extractObjFromChatId(str);
+  const obj = extractObjFromChatId(str || "");
+  if (!obj) {
+    console.log("getSessionIdFromChatIdQr fail: malformed str", str);
+    return "na";
+  }
   const sessionId = await query(
     `SELECT * FROM instance WHERE number = ? AND uid = ?`,
     [obj.fromNumber, obj.uid],
@@ -451,8 +455,17 @@ function setQrMsgObj(obj) {
 
 async function sendQrMsg({ uid, to, msgObj, chatInfo }) {
   try {
+    console.log("--- sendQrMsg DEBUG START ---");
+    console.log("uid:", uid);
+    console.log("to:", to);
+    console.log("msgObj:", JSON.stringify(msgObj));
+    console.log("chatInfo:", JSON.stringify(chatInfo));
+
     const sessionMobileNumber = extractFinalNumber(chatInfo);
+    console.log("sessionMobileNumber parsed:", sessionMobileNumber);
+
     if (!sessionMobileNumber) {
+      console.log("sendQrMsg fail: sessionMobileNumber is null");
       return {
         success: false,
         msg: "Session is not ready yet to send message please wait for few seconds and refresh the page to continue",
@@ -460,13 +473,17 @@ async function sendQrMsg({ uid, to, msgObj, chatInfo }) {
     }
 
     const qrObj = setQrMsgObj(msgObj);
+    console.log("qrObj rendered:", typeof qrObj);
 
     if (!qrObj) {
+      console.log("sendQrMsg fail: qrObj is null");
       return { success: false, msg: "Invalid message type" };
     }
 
     // getting session
+    console.log("chatInfo.chat_id:", chatInfo?.chat_id);
     const sessionId = await getSessionIdFromChatIdQr(chatInfo?.chat_id);
+    console.log("sessionId resolved:", sessionId);
 
     const {
       getSession,
