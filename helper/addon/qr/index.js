@@ -30,12 +30,23 @@ async function createSession(id, title) {
     sessions.set(id, { isInitializing: true });
     
     const authFolder = path.join(__dirname, "auth_info_baileys", id);
-    const { makeWASocket, useMultiFileAuthState, DisconnectReason } = await import("baileys");
+    const { makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion } = await import("baileys");
+    
+    let version = [2, 2413, 1]; // reasonable fallback
+    try {
+      const { version: latestVersion } = await fetchLatestBaileysVersion();
+      if (latestVersion) version = latestVersion;
+      console.log(`Using latest WhatsApp version for ${id}: ${version.join(".")}`);
+    } catch (e) {
+      console.log("Failed to fetch latest WA version, using fallback");
+    }
+
     const { state, saveCreds } = await useMultiFileAuthState(authFolder);
 
     const sock = makeWASocket({
       auth: state,
       logger: pino({ level: "silent" }),
+      version,
       browser: ["Chrome (Linux)", "Chrome", "110.0.5481.177"]
     });
 
