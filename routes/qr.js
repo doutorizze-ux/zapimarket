@@ -164,7 +164,7 @@ router.get("/get_all_agent", validateAgent, async (req, res) => {
     for (let instance of instances) {
       const check = getSession(instance.uniqueId);
 
-      if (!check) {
+      if (!check && instance.status !== "GENERATING") {
         // If no session, update status to "INACTIVE"
         await query(`UPDATE instance SET status = ? WHERE uniqueId = ?`, [
           "INACTIVE",
@@ -207,7 +207,7 @@ router.get("/get_all", validateUser, async (req, res) => {
     for (let instance of instances) {
       const check = getSession(instance.uniqueId);
 
-      if (!check) {
+      if (!check && instance.status !== "GENERATING") {
         // If no session, update status to "INACTIVE"
         await query(`UPDATE instance SET status = ? WHERE uniqueId = ?`, [
           "INACTIVE",
