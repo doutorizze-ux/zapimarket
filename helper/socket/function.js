@@ -497,6 +497,14 @@ async function sendQrMsg({ uid, to, msgObj, chatInfo }) {
       return { success: false, msg: "Session not found locally" };
     }
 
+    // Safety guard: session might be unauthenticated if QR is still on screen
+    if (!session?.authState?.creds?.me) {
+      return {
+        success: false,
+        msg: "Your WhatsApp is online but not fully logged in yet. Please scan the QR code first!",
+      };
+    }
+
     const jid = chatInfo?.isGroup ? formatGroup(to) : formatPhone(to);
 
     // console.log({ qrObj, jid });
