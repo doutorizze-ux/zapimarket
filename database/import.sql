@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
-  `email` varchar(999) DEFAULT NULL,
-  `password` varchar(999) DEFAULT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `role` varchar(999) NOT NULL DEFAULT 'admin',
+  `email` varchar(250) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `role` varchar(250) NOT NULL DEFAULT 'admin',
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
@@ -51,13 +51,13 @@ INSERT INTO `admin` (`id`, `email`, `password`, `uid`, `role`, `createdAt`) VALU
 
 CREATE TABLE `agents` (
   `id` int(11) NOT NULL,
-  `owner_uid` varchar(999) DEFAULT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `role` varchar(999) DEFAULT 'agent',
-  `email` varchar(999) DEFAULT NULL,
-  `password` varchar(999) DEFAULT NULL,
-  `name` varchar(999) DEFAULT NULL,
-  `mobile` varchar(999) DEFAULT NULL,
+  `owner_uid` varchar(250) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `role` varchar(250) DEFAULT 'agent',
+  `email` varchar(250) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `mobile` varchar(250) DEFAULT NULL,
   `comments` longtext DEFAULT NULL,
   `is_active` int(1) DEFAULT 1,
   `createdAt` timestamp NULL DEFAULT current_timestamp(),
@@ -76,9 +76,9 @@ CREATE TABLE `agents` (
 
 CREATE TABLE `agent_chats` (
   `id` int(11) NOT NULL,
-  `owner_uid` varchar(999) DEFAULT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `chat_id` varchar(999) DEFAULT NULL,
+  `owner_uid` varchar(250) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `chat_id` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -90,12 +90,12 @@ CREATE TABLE `agent_chats` (
 
 CREATE TABLE `agent_task` (
   `id` int(11) NOT NULL,
-  `owner_uid` varchar(999) DEFAULT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `title` varchar(999) DEFAULT NULL,
+  `owner_uid` varchar(250) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
   `description` longtext DEFAULT NULL,
   `agent_comments` longtext DEFAULT NULL,
-  `status` varchar(999) DEFAULT NULL,
+  `status` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -126,12 +126,12 @@ CREATE TABLE `auth` (
 
 CREATE TABLE `beta_api_logs` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `msg_id` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `msg_id` varchar(250) DEFAULT NULL,
   `request` longtext DEFAULT NULL,
   `err` longtext DEFAULT NULL,
   `response` longtext DEFAULT NULL,
-  `status` varchar(999) DEFAULT NULL,
+  `status` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -143,14 +143,14 @@ CREATE TABLE `beta_api_logs` (
 
 CREATE TABLE `beta_campaign` (
   `id` int(11) NOT NULL,
-  `campaign_id` varchar(999) NOT NULL,
-  `uid` varchar(999) NOT NULL,
-  `title` varchar(999) NOT NULL,
-  `template_name` varchar(999) NOT NULL,
-  `template_language` varchar(999) NOT NULL,
-  `phonebook_id` varchar(999) NOT NULL,
-  `phonebook_name` varchar(999) NOT NULL,
-  `status` varchar(999) NOT NULL DEFAULT 'PENDING',
+  `campaign_id` varchar(250) NOT NULL,
+  `uid` varchar(250) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `template_name` varchar(250) NOT NULL,
+  `template_language` varchar(250) NOT NULL,
+  `phonebook_id` varchar(250) NOT NULL,
+  `phonebook_name` varchar(250) NOT NULL,
+  `status` varchar(250) NOT NULL DEFAULT 'PENDING',
   `total_contacts` int(11) NOT NULL DEFAULT 0,
   `sent_count` int(11) NOT NULL DEFAULT 0,
   `delivered_count` int(11) NOT NULL DEFAULT 0,
@@ -160,7 +160,7 @@ CREATE TABLE `beta_campaign` (
   `header_variable` longtext DEFAULT NULL,
   `button_variables` longtext DEFAULT NULL,
   `schedule` datetime DEFAULT NULL,
-  `timezone` varchar(999) DEFAULT NULL,
+  `timezone` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -172,14 +172,14 @@ CREATE TABLE `beta_campaign` (
 
 CREATE TABLE `beta_campaign_logs` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) NOT NULL,
-  `campaign_id` varchar(999) NOT NULL,
-  `contact_name` varchar(999) NOT NULL,
-  `contact_mobile` varchar(999) NOT NULL,
-  `meta_msg_id` varchar(999) DEFAULT NULL,
-  `status` varchar(999) NOT NULL DEFAULT 'PENDING',
-  `delivery_status` varchar(999) DEFAULT NULL,
-  `delivery_time` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) NOT NULL,
+  `campaign_id` varchar(250) NOT NULL,
+  `contact_name` varchar(250) NOT NULL,
+  `contact_mobile` varchar(250) NOT NULL,
+  `meta_msg_id` varchar(250) DEFAULT NULL,
+  `status` varchar(250) NOT NULL DEFAULT 'PENDING',
+  `delivery_status` varchar(250) DEFAULT NULL,
+  `delivery_time` varchar(250) DEFAULT NULL,
   `error_message` longtext DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -192,13 +192,13 @@ CREATE TABLE `beta_campaign_logs` (
 
 CREATE TABLE `beta_chatbot` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `source` varchar(999) DEFAULT 'wa_chatbot',
-  `title` varchar(999) DEFAULT NULL,
-  `flow_id` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `source` varchar(250) DEFAULT 'wa_chatbot',
+  `title` varchar(250) DEFAULT NULL,
+  `flow_id` varchar(250) DEFAULT NULL,
   `active` int(11) DEFAULT 1,
   `origin` longtext DEFAULT NULL,
-  `origin_id` varchar(999) DEFAULT NULL,
+  `origin_id` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -210,18 +210,18 @@ CREATE TABLE `beta_chatbot` (
 
 CREATE TABLE `beta_chats` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `old_chat_id` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `old_chat_id` varchar(250) DEFAULT NULL,
   `profile` longtext DEFAULT NULL,
-  `origin_instance_id` varchar(999) DEFAULT NULL,
-  `chat_id` varchar(999) DEFAULT NULL,
+  `origin_instance_id` varchar(250) DEFAULT NULL,
+  `chat_id` varchar(250) DEFAULT NULL,
   `last_message` longtext DEFAULT NULL,
   `chat_label` longtext DEFAULT NULL,
   `chat_note` longtext DEFAULT NULL,
-  `sender_name` varchar(999) DEFAULT NULL,
-  `sender_mobile` varchar(999) DEFAULT NULL,
+  `sender_name` varchar(250) DEFAULT NULL,
+  `sender_mobile` varchar(250) DEFAULT NULL,
   `unread_count` bigint(20) DEFAULT 0,
-  `origin` varchar(999) DEFAULT NULL,
+  `origin` varchar(250) DEFAULT NULL,
   `assigned_agent` longtext DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -235,22 +235,22 @@ CREATE TABLE `beta_chats` (
 
 CREATE TABLE `beta_conversation` (
   `id` int(11) NOT NULL,
-  `type` varchar(999) DEFAULT NULL,
-  `chat_id` varchar(999) DEFAULT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `status` varchar(999) DEFAULT NULL,
-  `metaChatId` varchar(999) DEFAULT NULL,
+  `type` varchar(250) DEFAULT NULL,
+  `chat_id` varchar(250) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `status` varchar(250) DEFAULT NULL,
+  `metaChatId` varchar(250) DEFAULT NULL,
   `msgContext` longtext DEFAULT NULL,
-  `reaction` varchar(999) DEFAULT NULL,
-  `timestamp` varchar(999) DEFAULT NULL,
-  `senderName` varchar(999) DEFAULT NULL,
-  `senderMobile` varchar(999) DEFAULT NULL,
-  `star` varchar(999) DEFAULT NULL,
-  `route` varchar(999) DEFAULT NULL,
+  `reaction` varchar(250) DEFAULT NULL,
+  `timestamp` varchar(250) DEFAULT NULL,
+  `senderName` varchar(250) DEFAULT NULL,
+  `senderMobile` varchar(250) DEFAULT NULL,
+  `star` varchar(250) DEFAULT NULL,
+  `route` varchar(250) DEFAULT NULL,
   `context` longtext DEFAULT NULL,
-  `origin` varchar(999) DEFAULT NULL,
+  `origin` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp(),
-  `sentBy` varchar(999) DEFAULT NULL
+  `sentBy` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -262,10 +262,10 @@ CREATE TABLE `beta_conversation` (
 CREATE TABLE `beta_flows` (
   `id` int(11) NOT NULL,
   `is_active` int(11) DEFAULT 1,
-  `uid` varchar(999) DEFAULT NULL,
-  `flow_id` varchar(999) DEFAULT NULL,
-  `source` varchar(999) DEFAULT NULL,
-  `name` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `flow_id` varchar(250) DEFAULT NULL,
+  `source` varchar(250) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
   `data` longtext DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -278,14 +278,14 @@ CREATE TABLE `beta_flows` (
 
 CREATE TABLE `broadcast` (
   `id` int(11) NOT NULL,
-  `broadcast_id` varchar(999) DEFAULT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `title` varchar(999) DEFAULT NULL,
+  `broadcast_id` varchar(250) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
   `templet` longtext DEFAULT NULL,
   `phonebook` longtext DEFAULT NULL,
-  `status` varchar(999) DEFAULT NULL,
+  `status` varchar(250) DEFAULT NULL,
   `schedule` datetime DEFAULT NULL,
-  `timezone` varchar(999) DEFAULT 'Asia/Kolkata',
+  `timezone` varchar(250) DEFAULT 'Asia/Kolkata',
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -297,15 +297,15 @@ CREATE TABLE `broadcast` (
 
 CREATE TABLE `broadcast_log` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `broadcast_id` varchar(999) DEFAULT NULL,
-  `templet_name` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `broadcast_id` varchar(250) DEFAULT NULL,
+  `templet_name` varchar(250) DEFAULT NULL,
   `is_read` int(1) DEFAULT 0,
-  `meta_msg_id` varchar(999) DEFAULT NULL,
-  `sender_mobile` varchar(999) DEFAULT NULL,
-  `send_to` varchar(999) DEFAULT NULL,
-  `delivery_status` varchar(999) DEFAULT 'PENDING',
-  `delivery_time` varchar(999) DEFAULT NULL,
+  `meta_msg_id` varchar(250) DEFAULT NULL,
+  `sender_mobile` varchar(250) DEFAULT NULL,
+  `send_to` varchar(250) DEFAULT NULL,
+  `delivery_status` varchar(250) DEFAULT 'PENDING',
+  `delivery_time` varchar(250) DEFAULT NULL,
   `err` longtext DEFAULT NULL,
   `example` longtext DEFAULT NULL,
   `contact` longtext DEFAULT NULL,
@@ -320,12 +320,12 @@ CREATE TABLE `broadcast_log` (
 
 CREATE TABLE `chatbot` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `title` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
   `for_all` int(1) DEFAULT 0,
   `chats` longtext DEFAULT NULL,
   `flow` longtext DEFAULT NULL,
-  `flow_id` varchar(999) DEFAULT NULL,
+  `flow_id` varchar(250) DEFAULT NULL,
   `active` int(1) DEFAULT 0,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `origin` longtext DEFAULT NULL
@@ -339,18 +339,18 @@ CREATE TABLE `chatbot` (
 
 CREATE TABLE `chats` (
   `id` int(11) NOT NULL,
-  `chat_id` varchar(999) DEFAULT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `last_message_came` varchar(999) DEFAULT NULL,
+  `chat_id` varchar(250) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `last_message_came` varchar(250) DEFAULT NULL,
   `chat_note` longtext DEFAULT NULL,
   `chat_tags` longtext DEFAULT NULL,
-  `sender_name` varchar(999) DEFAULT NULL,
-  `sender_mobile` varchar(999) DEFAULT NULL,
-  `chat_status` varchar(999) DEFAULT 'open',
+  `sender_name` varchar(250) DEFAULT NULL,
+  `sender_mobile` varchar(250) DEFAULT NULL,
+  `chat_status` varchar(250) DEFAULT 'open',
   `is_opened` int(1) DEFAULT 0,
   `last_message` longtext DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
-  `origin` varchar(999) DEFAULT 'meta',
+  `origin` varchar(250) DEFAULT 'meta',
   `profile` longtext DEFAULT NULL,
   `other` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -363,8 +363,8 @@ CREATE TABLE `chats` (
 
 CREATE TABLE `chat_tags` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `hex` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `hex` varchar(250) DEFAULT NULL,
   `title` longtext DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -377,13 +377,13 @@ CREATE TABLE `chat_tags` (
 
 CREATE TABLE `chat_widget` (
   `id` int(11) NOT NULL,
-  `unique_id` varchar(999) DEFAULT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `title` varchar(999) DEFAULT NULL,
-  `whatsapp_number` varchar(999) DEFAULT NULL,
-  `logo` varchar(999) DEFAULT NULL,
-  `place` varchar(999) DEFAULT NULL,
-  `size` varchar(999) DEFAULT NULL,
+  `unique_id` varchar(250) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
+  `whatsapp_number` varchar(250) DEFAULT NULL,
+  `logo` varchar(250) DEFAULT NULL,
+  `place` varchar(250) DEFAULT NULL,
+  `size` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -402,18 +402,18 @@ INSERT INTO `chat_widget` (`id`, `unique_id`, `uid`, `title`, `whatsapp_number`,
 
 CREATE TABLE `contact` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `phonebook_id` varchar(999) DEFAULT NULL,
-  `phonebook_name` varchar(999) DEFAULT NULL,
-  `name` varchar(999) DEFAULT NULL,
-  `mobile` varchar(999) DEFAULT NULL,
-  `var1` varchar(999) DEFAULT NULL,
-  `var2` varchar(999) DEFAULT NULL,
-  `var3` varchar(999) DEFAULT NULL,
-  `var4` varchar(999) DEFAULT NULL,
-  `var5` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `phonebook_id` varchar(250) DEFAULT NULL,
+  `phonebook_name` varchar(250) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `mobile` varchar(250) DEFAULT NULL,
+  `var1` varchar(250) DEFAULT NULL,
+  `var2` varchar(250) DEFAULT NULL,
+  `var3` varchar(250) DEFAULT NULL,
+  `var4` varchar(250) DEFAULT NULL,
+  `var5` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
-  `var6` varchar(999) DEFAULT NULL
+  `var6` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -431,9 +431,9 @@ INSERT INTO `contact` (`id`, `uid`, `phonebook_id`, `phonebook_name`, `name`, `m
 
 CREATE TABLE `contact_form` (
   `id` int(11) NOT NULL,
-  `email` varchar(999) DEFAULT NULL,
-  `name` varchar(999) DEFAULT NULL,
-  `mobile` varchar(999) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `mobile` varchar(250) DEFAULT NULL,
   `content` longtext DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -480,9 +480,9 @@ INSERT INTO `faq` (`id`, `question`, `answer`, `createdAt`) VALUES
 
 CREATE TABLE `flow` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `flow_id` varchar(999) DEFAULT NULL,
-  `title` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `flow_id` varchar(250) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `prevent_list` longtext DEFAULT NULL,
   `ai_list` longtext DEFAULT NULL
@@ -496,8 +496,8 @@ CREATE TABLE `flow` (
 
 CREATE TABLE `flow_data` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `uniqueId` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `uniqueId` varchar(250) DEFAULT NULL,
   `inputs` longtext DEFAULT NULL,
   `other` longtext DEFAULT NULL,
   `meta_data` longtext DEFAULT NULL,
@@ -512,11 +512,11 @@ CREATE TABLE `flow_data` (
 
 CREATE TABLE `flow_session` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `origin` varchar(999) DEFAULT NULL,
-  `origin_id` varchar(999) DEFAULT NULL,
-  `flow_id` varchar(999) DEFAULT NULL,
-  `sender_mobile` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `origin` varchar(250) DEFAULT NULL,
+  `origin_id` varchar(250) DEFAULT NULL,
+  `flow_id` varchar(250) DEFAULT NULL,
+  `sender_mobile` varchar(250) DEFAULT NULL,
   `data` longtext DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -529,9 +529,9 @@ CREATE TABLE `flow_session` (
 
 CREATE TABLE `gen_links` (
   `id` int(11) NOT NULL,
-  `wa_mobile` varchar(999) DEFAULT NULL,
-  `email` varchar(999) DEFAULT NULL,
-  `msg` varchar(999) DEFAULT NULL,
+  `wa_mobile` varchar(250) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `msg` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -551,8 +551,8 @@ INSERT INTO `gen_links` (`id`, `wa_mobile`, `email`, `msg`, `createdAt`) VALUES
 
 CREATE TABLE `g_auth` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `label` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `label` varchar(250) DEFAULT NULL,
   `url` longtext DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -565,10 +565,10 @@ CREATE TABLE `g_auth` (
 
 CREATE TABLE `instance` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `title` varchar(999) DEFAULT NULL,
-  `number` varchar(999) DEFAULT NULL,
-  `uniqueId` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
+  `number` varchar(250) DEFAULT NULL,
+  `uniqueId` varchar(250) DEFAULT NULL,
   `qr` longtext DEFAULT NULL,
   `data` longtext DEFAULT NULL,
   `other` longtext DEFAULT NULL,
@@ -584,15 +584,15 @@ CREATE TABLE `instance` (
 
 CREATE TABLE `meta_api` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `waba_id` varchar(999) DEFAULT NULL,
-  `business_account_id` varchar(999) DEFAULT NULL,
-  `access_token` varchar(999) DEFAULT NULL,
-  `business_phone_number_id` varchar(999) DEFAULT NULL,
-  `app_id` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `waba_id` varchar(250) DEFAULT NULL,
+  `business_account_id` varchar(250) DEFAULT NULL,
+  `access_token` varchar(250) DEFAULT NULL,
+  `business_phone_number_id` varchar(250) DEFAULT NULL,
+  `app_id` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `embed_data` longtext DEFAULT NULL,
-  `login_type` varchar(999) DEFAULT 'manual',
+  `login_type` varchar(250) DEFAULT 'manual',
   `is_coexistence` tinyint(1) DEFAULT 0,
   `platform_type` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -605,10 +605,10 @@ CREATE TABLE `meta_api` (
 
 CREATE TABLE `meta_templet_media` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `templet_name` varchar(999) DEFAULT NULL,
-  `meta_hash` varchar(999) DEFAULT NULL,
-  `file_name` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `templet_name` varchar(250) DEFAULT NULL,
+  `meta_hash` varchar(250) DEFAULT NULL,
+  `file_name` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -634,11 +634,11 @@ CREATE TABLE `mobile_app` (
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `payment_mode` varchar(999) DEFAULT NULL,
-  `amount` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `payment_mode` varchar(250) DEFAULT NULL,
+  `amount` varchar(250) DEFAULT NULL,
   `data` longtext DEFAULT NULL,
-  `s_token` varchar(999) DEFAULT NULL,
+  `s_token` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -650,9 +650,9 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `page` (
   `id` int(11) NOT NULL,
-  `slug` varchar(999) DEFAULT NULL,
-  `title` varchar(999) DEFAULT NULL,
-  `image` varchar(999) DEFAULT NULL,
+  `slug` varchar(250) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
+  `image` varchar(250) DEFAULT NULL,
   `content` longtext DEFAULT NULL,
   `permanent` int(1) DEFAULT 0,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
@@ -678,7 +678,7 @@ INSERT INTO `page` (`id`, `slug`, `title`, `image`, `content`, `permanent`, `cre
 
 CREATE TABLE `partners` (
   `id` int(11) NOT NULL,
-  `filename` varchar(999) DEFAULT NULL,
+  `filename` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -704,8 +704,8 @@ INSERT INTO `partners` (`id`, `filename`, `createdAt`) VALUES
 
 CREATE TABLE `phonebook` (
   `id` int(11) NOT NULL,
-  `name` varchar(999) DEFAULT NULL,
-  `uid` varchar(999) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -717,17 +717,17 @@ CREATE TABLE `phonebook` (
 
 CREATE TABLE `plan` (
   `id` int(11) NOT NULL,
-  `title` varchar(999) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
   `short_description` longtext DEFAULT NULL,
   `allow_tag` int(1) DEFAULT 0,
   `allow_note` int(1) DEFAULT 0,
   `allow_chatbot` int(1) DEFAULT 0,
-  `contact_limit` varchar(999) DEFAULT NULL,
+  `contact_limit` varchar(250) DEFAULT NULL,
   `allow_api` int(1) DEFAULT 0,
   `is_trial` int(1) DEFAULT 0,
   `price` bigint(20) DEFAULT NULL,
-  `price_strike` varchar(999) DEFAULT NULL,
-  `plan_duration_in_days` varchar(999) DEFAULT NULL,
+  `price_strike` varchar(250) DEFAULT NULL,
+  `plan_duration_in_days` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `qr_account` int(11) DEFAULT 0,
   `wa_warmer` int(11) DEFAULT 0,
@@ -751,7 +751,7 @@ INSERT INTO `plan` (`id`, `title`, `short_description`, `allow_tag`, `allow_note
 
 CREATE TABLE `quick_reply` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
   `msg` longtext DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -764,8 +764,8 @@ CREATE TABLE `quick_reply` (
 
 CREATE TABLE `rooms` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `socket_id` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `socket_id` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -777,10 +777,10 @@ CREATE TABLE `rooms` (
 
 CREATE TABLE `smtp` (
   `id` int(11) NOT NULL,
-  `email` varchar(999) DEFAULT NULL,
-  `host` varchar(999) DEFAULT NULL,
-  `port` varchar(999) DEFAULT NULL,
-  `password` varchar(999) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `host` varchar(250) DEFAULT NULL,
+  `port` varchar(250) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `username` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -800,12 +800,12 @@ INSERT INTO `smtp` (`id`, `email`, `host`, `port`, `password`, `createdAt`, `use
 
 CREATE TABLE `telegram_session` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) NOT NULL,
-  `status` varchar(999) NOT NULL,
-  `session_id` varchar(999) NOT NULL,
-  `title` varchar(999) NOT NULL,
-  `api_id` varchar(999) NOT NULL,
-  `api_hash` varchar(999) NOT NULL,
+  `uid` varchar(250) NOT NULL,
+  `status` varchar(250) NOT NULL,
+  `session_id` varchar(250) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `api_id` varchar(250) NOT NULL,
+  `api_hash` varchar(250) NOT NULL,
   `data` longtext NOT NULL,
   `session` longtext NOT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
@@ -819,10 +819,10 @@ CREATE TABLE `telegram_session` (
 
 CREATE TABLE `templets` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
   `content` longtext DEFAULT NULL,
-  `type` varchar(999) DEFAULT NULL,
-  `title` varchar(999) DEFAULT NULL,
+  `type` varchar(250) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -834,10 +834,10 @@ CREATE TABLE `templets` (
 
 CREATE TABLE `testimonial` (
   `id` int(11) NOT NULL,
-  `title` varchar(999) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
   `description` longtext DEFAULT NULL,
-  `reviewer_name` varchar(999) DEFAULT NULL,
-  `reviewer_position` varchar(999) DEFAULT NULL,
+  `reviewer_name` varchar(250) DEFAULT NULL,
+  `reviewer_position` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -858,17 +858,17 @@ INSERT INTO `testimonial` (`id`, `title`, `description`, `reviewer_name`, `revie
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `role` varchar(999) DEFAULT 'user',
-  `uid` varchar(999) DEFAULT NULL,
-  `name` varchar(999) DEFAULT NULL,
-  `email` varchar(999) DEFAULT NULL,
-  `password` varchar(999) DEFAULT NULL,
-  `mobile_with_country_code` varchar(999) DEFAULT NULL,
-  `timezone` varchar(999) DEFAULT 'Asia/Kolkata',
+  `role` varchar(250) DEFAULT 'user',
+  `uid` varchar(250) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `mobile_with_country_code` varchar(250) DEFAULT NULL,
+  `timezone` varchar(250) DEFAULT 'Asia/Kolkata',
   `plan` longtext DEFAULT NULL,
-  `plan_expire` varchar(999) DEFAULT NULL,
+  `plan_expire` varchar(250) DEFAULT NULL,
   `trial` int(1) DEFAULT 0,
-  `api_key` varchar(999) DEFAULT NULL,
+  `api_key` varchar(250) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `fcm_data` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -881,7 +881,7 @@ CREATE TABLE `user` (
 
 CREATE TABLE `warmers` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
   `instances` longtext DEFAULT NULL,
   `is_active` int(11) DEFAULT 1,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
@@ -895,7 +895,7 @@ CREATE TABLE `warmers` (
 
 CREATE TABLE `warmer_script` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
   `message` longtext DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -925,9 +925,9 @@ INSERT INTO `warmer_script` (`id`, `uid`, `message`, `createdAt`) VALUES
 
 CREATE TABLE `wa_call_bot` (
   `id` int(11) NOT NULL,
-  `uid` varchar(999) DEFAULT NULL,
-  `title` varchar(999) DEFAULT NULL,
-  `flow_id` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `title` varchar(250) DEFAULT NULL,
+  `flow_id` varchar(250) DEFAULT NULL,
   `data` longtext DEFAULT NULL,
   `active` int(11) DEFAULT 1,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
@@ -975,10 +975,10 @@ CREATE TABLE `wa_call_broadcasts` (
 CREATE TABLE `wa_call_flows` (
   `id` int(11) NOT NULL,
   `is_active` int(11) DEFAULT 1,
-  `uid` varchar(999) DEFAULT NULL,
-  `flow_id` varchar(999) DEFAULT NULL,
-  `source` varchar(999) DEFAULT NULL,
-  `name` varchar(999) DEFAULT NULL,
+  `uid` varchar(250) DEFAULT NULL,
+  `flow_id` varchar(250) DEFAULT NULL,
+  `source` varchar(250) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
   `data` longtext DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1060,27 +1060,27 @@ CREATE TABLE `webhook_logs` (
 
 CREATE TABLE `web_private` (
   `id` int(11) NOT NULL,
-  `pay_offline_id` varchar(999) DEFAULT NULL,
+  `pay_offline_id` varchar(250) DEFAULT NULL,
   `pay_offline_key` longtext DEFAULT NULL,
   `offline_active` int(1) DEFAULT 0,
-  `pay_stripe_id` varchar(999) DEFAULT NULL,
-  `pay_stripe_key` varchar(999) DEFAULT NULL,
+  `pay_stripe_id` varchar(250) DEFAULT NULL,
+  `pay_stripe_key` varchar(250) DEFAULT NULL,
   `stripe_active` int(1) DEFAULT 0,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
-  `pay_paypal_id` varchar(999) DEFAULT NULL,
-  `pay_paypal_key` varchar(999) DEFAULT NULL,
-  `paypal_active` varchar(999) DEFAULT NULL,
-  `rz_id` varchar(999) DEFAULT NULL,
-  `rz_key` varchar(999) DEFAULT NULL,
-  `rz_active` varchar(999) DEFAULT NULL,
-  `pay_paystack_id` varchar(999) DEFAULT NULL,
-  `pay_paystack_key` varchar(999) DEFAULT NULL,
-  `paystack_active` varchar(999) DEFAULT NULL,
-  `qr_storage` varchar(999) DEFAULT 'local',
+  `pay_paypal_id` varchar(250) DEFAULT NULL,
+  `pay_paypal_key` varchar(250) DEFAULT NULL,
+  `paypal_active` varchar(250) DEFAULT NULL,
+  `rz_id` varchar(250) DEFAULT NULL,
+  `rz_key` varchar(250) DEFAULT NULL,
+  `rz_active` varchar(250) DEFAULT NULL,
+  `pay_paystack_id` varchar(250) DEFAULT NULL,
+  `pay_paystack_key` varchar(250) DEFAULT NULL,
+  `paystack_active` varchar(250) DEFAULT NULL,
+  `qr_storage` varchar(250) DEFAULT 'local',
   `mongodb_string` longtext DEFAULT NULL,
-  `embed_app_sec` varchar(999) DEFAULT NULL,
-  `embed_app_id` varchar(999) DEFAULT NULL,
-  `embed_app_config` varchar(999) DEFAULT NULL,
+  `embed_app_sec` varchar(250) DEFAULT NULL,
+  `embed_app_id` varchar(250) DEFAULT NULL,
+  `embed_app_config` varchar(250) DEFAULT NULL,
   `teleAppId` text DEFAULT NULL,
   `teleHash` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1100,19 +1100,19 @@ INSERT INTO `web_private` (`id`, `pay_offline_id`, `pay_offline_key`, `offline_a
 
 CREATE TABLE `web_public` (
   `id` int(11) NOT NULL,
-  `currency_code` varchar(999) DEFAULT NULL,
-  `logo` varchar(999) DEFAULT NULL,
-  `app_name` varchar(999) DEFAULT NULL,
-  `custom_home` varchar(999) DEFAULT NULL,
+  `currency_code` varchar(250) DEFAULT NULL,
+  `logo` varchar(250) DEFAULT NULL,
+  `app_name` varchar(250) DEFAULT NULL,
+  `custom_home` varchar(250) DEFAULT NULL,
   `is_custom_home` int(1) DEFAULT 0,
   `meta_description` longtext DEFAULT NULL,
-  `currency_symbol` varchar(999) DEFAULT NULL,
-  `chatbot_screen_tutorial` varchar(999) DEFAULT NULL,
-  `broadcast_screen_tutorial` varchar(999) DEFAULT NULL,
-  `home_page_tutorial` varchar(999) DEFAULT NULL,
+  `currency_symbol` varchar(250) DEFAULT NULL,
+  `chatbot_screen_tutorial` varchar(250) DEFAULT NULL,
+  `broadcast_screen_tutorial` varchar(250) DEFAULT NULL,
+  `home_page_tutorial` varchar(250) DEFAULT NULL,
   `login_header_footer` int(1) DEFAULT 1,
-  `exchange_rate` varchar(999) DEFAULT NULL,
-  `google_client_id` varchar(999) DEFAULT NULL,
+  `exchange_rate` varchar(250) DEFAULT NULL,
+  `google_client_id` varchar(250) DEFAULT NULL,
   `google_login_active` int(11) DEFAULT 1,
   `rtl` int(11) DEFAULT 0,
   `other` longtext DEFAULT NULL
