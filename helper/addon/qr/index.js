@@ -49,14 +49,19 @@ async function createSession(id, title) {
         }
 
         if (connection === "close") {
-          const shouldReconnect = lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut;
+          const reason = lastDisconnect?.error?.output?.statusCode;
+          console.log(`Connection CLOSED for ${id}. Reason: ${reason}. full error:`, lastDisconnect?.error);
+          const shouldReconnect = reason !== DisconnectReason.loggedOut;
           if (shouldReconnect) {
+            console.log(`Reconnecting session ${id}...`);
             createSession(id, title);
           } else {
+            console.log(`Session ${id} logged out or permanent fail.`);
             sessions.delete(id);
             await query("UPDATE instance SET status = ? WHERE uniqueId = ?", ["INACTIVE", id]);
           }
         } else if (connection === "open") {
+          console.log(`Connection OPEN for ${id}`);
           await query("UPDATE instance SET status = ?, number = ? WHERE uniqueId = ?", ["ACTIVE", sock.user.id.split(":")[0], id]);
         }
       } catch (err) {
