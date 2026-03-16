@@ -3,7 +3,7 @@ const path = require("path");
 const pino = require("pino");
 const { toDataURL } = require("qrcode");
 const { query } = require("../../../database/dbpromise");
-const { makeWASocket, useMultiFileAuthState, DisconnectReason } = require("baileys");
+
 const { sendToUid } = require("../../../socket");
 
 const sessions = new Map();
@@ -19,6 +19,7 @@ function getStorageConfig() {
 async function createSession(id, title) {
   try {
     const authFolder = path.join(__dirname, "auth_info_baileys", id);
+    const { makeWASocket, useMultiFileAuthState, DisconnectReason } = await import("baileys");
     const { state, saveCreds } = await useMultiFileAuthState(authFolder);
 
     const sock = makeWASocket({
