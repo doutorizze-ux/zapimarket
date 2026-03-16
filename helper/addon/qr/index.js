@@ -4,7 +4,7 @@ const pino = require("pino");
 const { toDataURL } = require("qrcode");
 const { query } = require("../../../database/dbpromise");
 const { makeWASocket, useMultiFileAuthState, DisconnectReason } = require("baileys");
-const { sendToUid } = require("../../socket");
+const { sendToUid } = require("../../../socket");
 
 const sessions = new Map();
 
