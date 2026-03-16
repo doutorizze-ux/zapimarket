@@ -18,6 +18,15 @@ function getStorageConfig() {
 
 async function createSession(id, title) {
   try {
+    // Cleanup any old active listeners first to avoid memory leaks or duplicate updates on loop
+    const previous = sessions.get(id);
+    if (previous && previous.ev) {
+      try {
+         console.log(`Closing previous duplicate session listener for ${id}`);
+         previous.ev.removeAllListeners();
+      } catch (e) {}
+    }
+
     sessions.set(id, { isInitializing: true });
     
     const authFolder = path.join(__dirname, "auth_info_baileys", id);
@@ -26,7 +35,8 @@ async function createSession(id, title) {
 
     const sock = makeWASocket({
       auth: state,
-      logger: pino({ level: "silent" })
+      logger: pino({ level: "silent" }),
+      browser: ["Chrome (Linux)", "Chrome", "110.0.5481.177"]
     });
 
     sessions.set(id, sock);
@@ -55,8 +65,10 @@ async function createSession(id, title) {
           console.log(`Connection CLOSED for ${id}. Reason: ${reason}. full error:`, lastDisconnect?.error);
           const shouldReconnect = reason !== DisconnectReason.loggedOut;
           if (shouldReconnect) {
-            console.log(`Reconnecting session ${id}...`);
-            createSession(id, title);
+            console.log(`Reconnecting session ${id} in 5 seconds...`);
+            setTimeout(() => {
+              createSession(id, title);
+            }, 5000);
           } else {
             console.log(`Session ${id} logged out or permanent fail.`);
             sessions.delete(id);
