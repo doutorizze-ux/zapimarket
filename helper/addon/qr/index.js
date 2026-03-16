@@ -18,6 +18,8 @@ function getStorageConfig() {
 
 async function createSession(id, title) {
   try {
+    sessions.set(id, { isInitializing: true });
+    
     const authFolder = path.join(__dirname, "auth_info_baileys", id);
     const { makeWASocket, useMultiFileAuthState, DisconnectReason } = await import("baileys");
     const { state, saveCreds } = await useMultiFileAuthState(authFolder);
@@ -58,6 +60,15 @@ async function createSession(id, title) {
           } else {
             console.log(`Session ${id} logged out or permanent fail.`);
             sessions.delete(id);
+            const authFolder = path.join(__dirname, "auth_info_baileys", id);
+            try {
+              if (fs.existsSync(authFolder)) {
+                fs.rmSync(authFolder, { recursive: true, force: true });
+                console.log(`Deleted corrupt auth folder for ${id}`);
+              }
+            } catch (e) {
+              console.error("Failed to delete auth info folder", e);
+            }
             await query("UPDATE instance SET status = ? WHERE uniqueId = ?", ["INACTIVE", id]);
           }
         } else if (connection === "open") {
