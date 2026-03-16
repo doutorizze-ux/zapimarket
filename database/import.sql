@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
+DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `email` varchar(250) DEFAULT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `email`, `password`, `uid`, `role`, `createdAt`) VALUES
+INSERT IGNORE INTO `admin` (`id`, `email`, `password`, `uid`, `role`, `createdAt`) VALUES
 (1, 'admin@admin.com', '$2b$10$HHbFod1VgucjKF0btEPODem4n380zouMZZN7p6yHgeb6UZYqPZqXu', 'XhbfYkIAC1bYGhUodfJppmRCEUyGQJCZ', 'admin', '2024-01-31 13:54:21');
 
 -- --------------------------------------------------------
@@ -49,6 +50,7 @@ INSERT INTO `admin` (`id`, `email`, `password`, `uid`, `role`, `createdAt`) VALU
 -- Table structure for table `agents`
 --
 
+DROP TABLE IF EXISTS `agents`;
 CREATE TABLE `agents` (
   `id` int(11) NOT NULL,
   `owner_uid` varchar(250) DEFAULT NULL,
@@ -74,6 +76,7 @@ CREATE TABLE `agents` (
 -- Table structure for table `agent_chats`
 --
 
+DROP TABLE IF EXISTS `agent_chats`;
 CREATE TABLE `agent_chats` (
   `id` int(11) NOT NULL,
   `owner_uid` varchar(250) DEFAULT NULL,
@@ -88,6 +91,7 @@ CREATE TABLE `agent_chats` (
 -- Table structure for table `agent_task`
 --
 
+DROP TABLE IF EXISTS `agent_task`;
 CREATE TABLE `agent_task` (
   `id` int(11) NOT NULL,
   `owner_uid` varchar(250) DEFAULT NULL,
@@ -103,7 +107,7 @@ CREATE TABLE `agent_task` (
 -- Dumping data for table `agent_task`
 --
 
-INSERT INTO `agent_task` (`id`, `owner_uid`, `uid`, `title`, `description`, `agent_comments`, `status`, `createdAt`) VALUES
+INSERT IGNORE INTO `agent_task` (`id`, `owner_uid`, `uid`, `title`, `description`, `agent_comments`, `status`, `createdAt`) VALUES
 (2, 'lWvj6K0xI0FlSKJoyV7ak9DN0mzvKJK8', 'n9xrxIvwIajEo2JO2poQ0b3UyUnhUF3g', 'holiday ', 'tell all customer that its holiday', 'this was done', 'COMPLETED', '2024-04-09 06:51:55');
 
 -- --------------------------------------------------------
@@ -112,6 +116,7 @@ INSERT INTO `agent_task` (`id`, `owner_uid`, `uid`, `title`, `description`, `age
 -- Table structure for table `auth`
 --
 
+DROP TABLE IF EXISTS `auth`;
 CREATE TABLE `auth` (
   `session` varchar(50) NOT NULL,
   `id` varchar(80) NOT NULL,
@@ -124,6 +129,7 @@ CREATE TABLE `auth` (
 -- Table structure for table `beta_api_logs`
 --
 
+DROP TABLE IF EXISTS `beta_api_logs`;
 CREATE TABLE `beta_api_logs` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -141,6 +147,7 @@ CREATE TABLE `beta_api_logs` (
 -- Table structure for table `beta_campaign`
 --
 
+DROP TABLE IF EXISTS `beta_campaign`;
 CREATE TABLE `beta_campaign` (
   `id` int(11) NOT NULL,
   `campaign_id` varchar(250) NOT NULL,
@@ -170,6 +177,7 @@ CREATE TABLE `beta_campaign` (
 -- Table structure for table `beta_campaign_logs`
 --
 
+DROP TABLE IF EXISTS `beta_campaign_logs`;
 CREATE TABLE `beta_campaign_logs` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) NOT NULL,
@@ -190,6 +198,7 @@ CREATE TABLE `beta_campaign_logs` (
 -- Table structure for table `beta_chatbot`
 --
 
+DROP TABLE IF EXISTS `beta_chatbot`;
 CREATE TABLE `beta_chatbot` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -208,6 +217,7 @@ CREATE TABLE `beta_chatbot` (
 -- Table structure for table `beta_chats`
 --
 
+DROP TABLE IF EXISTS `beta_chats`;
 CREATE TABLE `beta_chats` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -233,6 +243,7 @@ CREATE TABLE `beta_chats` (
 -- Table structure for table `beta_conversation`
 --
 
+DROP TABLE IF EXISTS `beta_conversation`;
 CREATE TABLE `beta_conversation` (
   `id` int(11) NOT NULL,
   `type` varchar(250) DEFAULT NULL,
@@ -259,6 +270,7 @@ CREATE TABLE `beta_conversation` (
 -- Table structure for table `beta_flows`
 --
 
+DROP TABLE IF EXISTS `beta_flows`;
 CREATE TABLE `beta_flows` (
   `id` int(11) NOT NULL,
   `is_active` int(11) DEFAULT 1,
@@ -276,6 +288,7 @@ CREATE TABLE `beta_flows` (
 -- Table structure for table `broadcast`
 --
 
+DROP TABLE IF EXISTS `broadcast`;
 CREATE TABLE `broadcast` (
   `id` int(11) NOT NULL,
   `broadcast_id` varchar(250) DEFAULT NULL,
@@ -295,6 +308,7 @@ CREATE TABLE `broadcast` (
 -- Table structure for table `broadcast_log`
 --
 
+DROP TABLE IF EXISTS `broadcast_log`;
 CREATE TABLE `broadcast_log` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -318,6 +332,7 @@ CREATE TABLE `broadcast_log` (
 -- Table structure for table `chatbot`
 --
 
+DROP TABLE IF EXISTS `chatbot`;
 CREATE TABLE `chatbot` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -337,6 +352,7 @@ CREATE TABLE `chatbot` (
 -- Table structure for table `chats`
 --
 
+DROP TABLE IF EXISTS `chats`;
 CREATE TABLE `chats` (
   `id` int(11) NOT NULL,
   `chat_id` varchar(250) DEFAULT NULL,
@@ -361,6 +377,7 @@ CREATE TABLE `chats` (
 -- Table structure for table `chat_tags`
 --
 
+DROP TABLE IF EXISTS `chat_tags`;
 CREATE TABLE `chat_tags` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -375,6 +392,7 @@ CREATE TABLE `chat_tags` (
 -- Table structure for table `chat_widget`
 --
 
+DROP TABLE IF EXISTS `chat_widget`;
 CREATE TABLE `chat_widget` (
   `id` int(11) NOT NULL,
   `unique_id` varchar(250) DEFAULT NULL,
@@ -391,7 +409,7 @@ CREATE TABLE `chat_widget` (
 -- Dumping data for table `chat_widget`
 --
 
-INSERT INTO `chat_widget` (`id`, `unique_id`, `uid`, `title`, `whatsapp_number`, `logo`, `place`, `size`, `createdAt`) VALUES
+INSERT IGNORE INTO `chat_widget` (`id`, `unique_id`, `uid`, `title`, `whatsapp_number`, `logo`, `place`, `size`, `createdAt`) VALUES
 (5, 'ydHVJqmfnL', 'lWvj6K0xI0FlSKJoyV7ak9DN0mzvKJK8', 'test', '918430088300', 'whatsapp-color-icon.png', 'BOTTOM_RIGHT', '65', '2024-04-10 14:09:49');
 
 -- --------------------------------------------------------
@@ -400,6 +418,7 @@ INSERT INTO `chat_widget` (`id`, `unique_id`, `uid`, `title`, `whatsapp_number`,
 -- Table structure for table `contact`
 --
 
+DROP TABLE IF EXISTS `contact`;
 CREATE TABLE `contact` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -420,7 +439,7 @@ CREATE TABLE `contact` (
 -- Dumping data for table `contact`
 --
 
-INSERT INTO `contact` (`id`, `uid`, `phonebook_id`, `phonebook_name`, `name`, `mobile`, `var1`, `var2`, `var3`, `var4`, `var5`, `createdAt`, `var6`) VALUES
+INSERT IGNORE INTO `contact` (`id`, `uid`, `phonebook_id`, `phonebook_name`, `name`, `mobile`, `var1`, `var2`, `var3`, `var4`, `var5`, `createdAt`, `var6`) VALUES
 (48, 'OnjWZ9wHtdqTrAnZL32DgYbZjs3UZlis', '39', 'code', 'codeyon', '918430088300', NULL, NULL, NULL, NULL, NULL, '2025-09-09 09:26:18', NULL);
 
 -- --------------------------------------------------------
@@ -429,6 +448,7 @@ INSERT INTO `contact` (`id`, `uid`, `phonebook_id`, `phonebook_name`, `name`, `m
 -- Table structure for table `contact_form`
 --
 
+DROP TABLE IF EXISTS `contact_form`;
 CREATE TABLE `contact_form` (
   `id` int(11) NOT NULL,
   `email` varchar(250) DEFAULT NULL,
@@ -442,7 +462,7 @@ CREATE TABLE `contact_form` (
 -- Dumping data for table `contact_form`
 --
 
-INSERT INTO `contact_form` (`id`, `email`, `name`, `mobile`, `content`, `createdAt`) VALUES
+INSERT IGNORE INTO `contact_form` (`id`, `email`, `name`, `mobile`, `content`, `createdAt`) VALUES
 (1, 'email@gmail.com', 'John do', '+91999999999', 'hello, what are the charges', '2024-02-28 07:57:12'),
 (5, 'Rosslina70@gmail.com', 'Rosslina bt Mohamed Ali', '0182124394', 'Urut Terapuetic  Neuromuskuler & Terapi Getaran Saraf', '2026-01-10 04:07:53'),
 (6, 'email@gmail.com', 'asd', '91823233', 'asdsad', '2026-01-23 07:35:43');
@@ -453,6 +473,7 @@ INSERT INTO `contact_form` (`id`, `email`, `name`, `mobile`, `content`, `created
 -- Table structure for table `faq`
 --
 
+DROP TABLE IF EXISTS `faq`;
 CREATE TABLE `faq` (
   `id` int(11) NOT NULL,
   `question` longtext DEFAULT NULL,
@@ -464,7 +485,7 @@ CREATE TABLE `faq` (
 -- Dumping data for table `faq`
 --
 
-INSERT INTO `faq` (`id`, `question`, `answer`, `createdAt`) VALUES
+INSERT IGNORE INTO `faq` (`id`, `question`, `answer`, `createdAt`) VALUES
 (4, 'Can I use my existing WhatsApp number?', 'Yes, you can use an existing WhatsApp number. However, before onboarding, you must first delete the WhatsApp account linked to that number. If you wish to back up your WhatsApp text messages so that you can restore to WhatsCRM, you can use our Chat backup plugin', '2024-02-27 11:20:45'),
 (5, 'Can I use my existing WhatsApp number?', 'Yes, you can use an existing WhatsApp number. However, before onboarding, you must first delete the WhatsApp account linked to that number. If you wish to back up your WhatsApp text messages so that you can restore to WhatsCRM, you can use our Chat backup plugin', '2024-02-27 11:20:52'),
 (6, 'Can I use my existing WhatsApp number?', 'Yes, you can use an existing WhatsApp number. However, before onboarding, you must first delete the WhatsApp account linked to that number. If you wish to back up your WhatsApp text messages so that you can restore to WhatsCRM, you can use our Chat backup plugin', '2024-02-27 11:20:57'),
@@ -478,6 +499,7 @@ INSERT INTO `faq` (`id`, `question`, `answer`, `createdAt`) VALUES
 -- Table structure for table `flow`
 --
 
+DROP TABLE IF EXISTS `flow`;
 CREATE TABLE `flow` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -494,6 +516,7 @@ CREATE TABLE `flow` (
 -- Table structure for table `flow_data`
 --
 
+DROP TABLE IF EXISTS `flow_data`;
 CREATE TABLE `flow_data` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -510,6 +533,7 @@ CREATE TABLE `flow_data` (
 -- Table structure for table `flow_session`
 --
 
+DROP TABLE IF EXISTS `flow_session`;
 CREATE TABLE `flow_session` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -527,6 +551,7 @@ CREATE TABLE `flow_session` (
 -- Table structure for table `gen_links`
 --
 
+DROP TABLE IF EXISTS `gen_links`;
 CREATE TABLE `gen_links` (
   `id` int(11) NOT NULL,
   `wa_mobile` varchar(250) DEFAULT NULL,
@@ -539,7 +564,7 @@ CREATE TABLE `gen_links` (
 -- Dumping data for table `gen_links`
 --
 
-INSERT INTO `gen_links` (`id`, `wa_mobile`, `email`, `msg`, `createdAt`) VALUES
+INSERT IGNORE INTO `gen_links` (`id`, `wa_mobile`, `email`, `msg`, `createdAt`) VALUES
 (2, '918430088300', 'email@gmail.com', 'hey there i am using whatsapp', '2024-08-25 09:41:12'),
 (3, '918430088300', 'email@gmail.com', 'hey i am living in my dreams.', '2024-08-25 10:02:05');
 
@@ -549,6 +574,7 @@ INSERT INTO `gen_links` (`id`, `wa_mobile`, `email`, `msg`, `createdAt`) VALUES
 -- Table structure for table `g_auth`
 --
 
+DROP TABLE IF EXISTS `g_auth`;
 CREATE TABLE `g_auth` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -563,6 +589,7 @@ CREATE TABLE `g_auth` (
 -- Table structure for table `instance`
 --
 
+DROP TABLE IF EXISTS `instance`;
 CREATE TABLE `instance` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -582,6 +609,7 @@ CREATE TABLE `instance` (
 -- Table structure for table `meta_api`
 --
 
+DROP TABLE IF EXISTS `meta_api`;
 CREATE TABLE `meta_api` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -603,6 +631,7 @@ CREATE TABLE `meta_api` (
 -- Table structure for table `meta_templet_media`
 --
 
+DROP TABLE IF EXISTS `meta_templet_media`;
 CREATE TABLE `meta_templet_media` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -618,6 +647,7 @@ CREATE TABLE `meta_templet_media` (
 -- Table structure for table `mobile_app`
 --
 
+DROP TABLE IF EXISTS `mobile_app`;
 CREATE TABLE `mobile_app` (
   `id` int(11) NOT NULL,
   `fcmJson` longtext DEFAULT NULL,
@@ -632,6 +662,7 @@ CREATE TABLE `mobile_app` (
 -- Table structure for table `orders`
 --
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -648,6 +679,7 @@ CREATE TABLE `orders` (
 -- Table structure for table `page`
 --
 
+DROP TABLE IF EXISTS `page`;
 CREATE TABLE `page` (
   `id` int(11) NOT NULL,
   `slug` varchar(250) DEFAULT NULL,
@@ -662,7 +694,7 @@ CREATE TABLE `page` (
 -- Dumping data for table `page`
 --
 
-INSERT INTO `page` (`id`, `slug`, `title`, `image`, `content`, `permanent`, `createdAt`) VALUES
+INSERT IGNORE INTO `page` (`id`, `slug`, `title`, `image`, `content`, `permanent`, `createdAt`) VALUES
 (3, 'privacy-policy', 'Privacy policy', 'yLUH6z8H3bQJzraErEpz7CQWepftq7D6.png', '<p><strong>Last updated:</strong> December 2025</p><p>WaCRM (“we”, “our”, or “us”) respects your privacy and is committed to protecting it. This Privacy Policy explains how we collect, use, store, and protect your information when you use our mobile application and related services.</p><p><br></p><h2>1. Information We Collect</h2><p>We collect only the information necessary to provide the service.</p><p><br></p><p><br></p><h3>a. Account Information</h3><p>When you create or use an account, we may collect:</p><p><br></p><p><br></p><ul><li>Name</li><li>Email address</li><li>Mobile number</li><li>Login credentials (encrypted)</li></ul><h3>b. Messaging &amp; Usage Data</h3><p>If you connect your WhatsApp account through official APIs or permitted integrations:</p><p><br></p><p><br></p><ul><li>Message metadata (timestamps, delivery status)</li><li>Message content is processed transiently only as required to display conversations to the user and is not stored or analyzed for any other purpose</li><li>Media files you choose to send, receive, or store</li></ul><p>We <strong>do not read, sell, or share message content for advertising purposes</strong>.</p><p><br></p><p><br></p><h3>c. Device Information</h3><ul><li>Device type and operating system</li><li>App version</li><li>Crash logs and performance diagnostics</li></ul><h3>d. Notifications</h3><p>If you choose to enable push notifications, we store a notification token to deliver alerts.</p><p>Notifications are <strong>optional</strong> and can be disabled at any time.</p><p><br></p><h2>2. How We Use Information</h2><p>We use collected information to:</p><p><br></p><p><br></p><ul><li>Provide and operate the WaCRM app</li><li>Authenticate users</li><li>Display and manage chat inboxes</li><li>Send optional notifications</li><li>Improve app performance and reliability</li><li>Provide customer support</li></ul><p>We do <strong>not</strong> use your data for advertising or marketing without consent.</p><p><br></p><h2>3. WhatsApp &amp; Third-Party Services</h2><p>WaCRM integrates with:</p><p><br></p><p><br></p><ul><li>Official WhatsApp Cloud API (by Meta)</li><li>Other optional third-party services configured by the user</li></ul><p>Data shared with third-party services is limited to what is required for the selected integration and is governed by their respective privacy policies.</p><p><br></p><h2>4. Payments &amp; Subscriptions</h2><p>WaCRM <strong>does not process payments, subscriptions, or in-app purchases</strong> within the mobile app.</p><p>Any account access or feature availability is provisioned externally by businesses or administrators and is not purchased inside the app.</p><p><br></p><h2>5. Data Sharing</h2><p>We do <strong>not sell or rent personal data</strong>.</p><p>We may share information only:</p><p><br></p><p><br></p><ul><li>When required by law</li><li>To comply with legal obligations</li><li>To protect rights, safety, or security</li></ul><h2>6. Data Storage &amp; Security</h2><ul><li>Data is stored securely using industry-standard safeguards</li><li>Access is restricted to authorized systems only</li><li>We use encryption where applicable</li></ul><p>Despite best efforts, no system is 100% secure.</p><p><br></p><h2>7. User Rights</h2><p>You have the right to:</p><p><br></p><p><br></p><ul><li>Access your personal data</li><li>Request correction or deletion of your data</li><li>Disable notifications at any time</li><li>Request account deletion</li></ul><p>To request account deletion or data removal, contact us using the details below.</p><p><br></p><p>WaCRM does not store WhatsApp messages on Meta’s behalf and acts only as a data processor for user-initiated communications.</p><p><br></p><h2>8. Children’s Privacy</h2><p>WaCRM is <strong>not intended for users under the age of 13</strong>.</p><p>We do not knowingly collect data from children.</p><p><br></p><h2>9. Changes to This Policy</h2><p>We may update this Privacy Policy from time to time.</p><p>Any changes will be posted on this page with an updated date.</p><p><br></p><h2>10. Contact Us</h2><p>If you have any questions about this Privacy Policy or your data, contact us at:</p><p><strong>Email:</strong> support@codeyon.com</p><p class=\"ql-align-justify\"><strong>Website:</strong> <a href=\"https://codeyon.com\" rel=\"noopener noreferrer\" target=\"_blank\">https://codeyon.com</a></p>', 1, '2024-02-28 09:21:17'),
 (4, 'terms-and-conditions', 'termns', 'yLUH6z8H3bQJzraErEpz7CQWepftq7D6.png', '<p><strong>Last updated:</strong> December 2025</p><p>WaCRM (“we”, “our”, or “us”) respects your privacy and is committed to protecting it. This Privacy Policy explains how we collect, use, store, and protect your information when you use our mobile application and related services.</p><h2>1. Information We Collect</h2><p>We collect only the information necessary to provide the service.</p><p><br></p><h3>a. Account Information</h3><p>When you create or use an account, we may collect:</p><p><br></p><ul><li>Name</li><li>Email address</li><li>Mobile number</li><li>Login credentials (encrypted)</li></ul><h3>b. Messaging &amp; Usage Data</h3><p>If you connect your WhatsApp account through official APIs or permitted integrations:</p><p><br></p><ul><li>Message metadata (timestamps, delivery status)</li><li>Message content processed only to display chats inside the app</li><li>Media files you choose to send, receive, or store</li></ul><p>We <strong>do not read, sell, or share message content for advertising purposes</strong>.</p><p><br></p><h3>c. Device Information</h3><ul><li>Device type and operating system</li><li>App version</li><li>Crash logs and performance diagnostics</li></ul><h3>d. Notifications</h3><p>If you choose to enable push notifications, we store a notification token to deliver alerts.</p><p>Notifications are <strong>optional</strong> and can be disabled at any time.</p><h2>2. How We Use Information</h2><p>We use collected information to:</p><p><br></p><ul><li>Provide and operate the WaCRM app</li><li>Authenticate users</li><li>Display and manage chat inboxes</li><li>Send optional notifications</li><li>Improve app performance and reliability</li><li>Provide customer support</li></ul><p>We do <strong>not</strong> use your data for advertising or marketing without consent.</p><h2>3. WhatsApp &amp; Third-Party Services</h2><p>WaCRM integrates with:</p><p><br></p><ul><li>Official WhatsApp Cloud API (by Meta)</li><li>Other optional third-party services configured by the user</li></ul><p>Data shared with third-party services is limited to what is required for the selected integration and is governed by their respective privacy policies.</p><h2>4. Payments &amp; Subscriptions</h2><p>WaCRM <strong>does not process payments, subscriptions, or in-app purchases</strong> within the mobile app.</p><p>Any account access or feature availability is provisioned externally by businesses or administrators and is not purchased inside the app.</p><h2>5. Data Sharing</h2><p>We do <strong>not sell or rent personal data</strong>.</p><p>We may share information only:</p><p><br></p><ul><li>When required by law</li><li>To comply with legal obligations</li><li>To protect rights, safety, or security</li></ul><h2>6. Data Storage &amp; Security</h2><ul><li>Data is stored securely using industry-standard safeguards</li><li>Access is restricted to authorized systems only</li><li>We use encryption where applicable</li></ul><p>Despite best efforts, no system is 100% secure.</p><h2>7. User Rights</h2><p>You have the right to:</p><p><br></p><ul><li>Access your personal data</li><li>Request correction or deletion of your data</li><li>Disable notifications at any time</li><li>Request account deletion</li></ul><p>To request account deletion or data removal, contact us using the details below.</p><h2>8. Children’s Privacy</h2><p>WaCRM is <strong>not intended for users under the age of 13</strong>.</p><p>We do not knowingly collect data from children.</p><h2>9. Changes to This Policy</h2><p>We may update this Privacy Policy from time to time.</p><p>Any changes will be posted on this page with an updated date.</p><h2>10. Contact Us</h2><p>If you have any questions about this Privacy Policy or your data, contact us at:</p><p><strong>Email:</strong> support@codeyon.com</p><p class=\"ql-align-justify\"><strong>Website:</strong> <a href=\"https://codeyon.com\" rel=\"noopener noreferrer\" target=\"_blank\">https://codeyon.com</a></p>', 1, '2024-02-28 09:26:11'),
 (17, 'lorem-one', 'Lorem one', 'dt6jyFCr8b0VFEZWv8qUNSfyxAeBR6Zz.png', '<p class=\"ql-align-justify\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur semper dolor nisi, eget porta urna eleifend eget. Aliquam erat volutpat. Quisque elementum metus id metus pharetra, et sagittis eros rhoncus. Donec lacinia viverra erat, vitae suscipit leo ultricies feugiat. Phasellus vulputate, est a volutpat molestie, ex diam gravida nisi, ac porta nulla urna eu ipsum. Ut lobortis erat id porttitor suscipit. Integer tristique neque eu diam ornare, sit amet tincidunt nulla luctus. Morbi ultricies nisl sit amet mattis bibendum. Nam gravida at est vel eleifend. Cras ultricies congue ligula id convallis. Phasellus sit amet dolor et neque dapibus iaculis non eu dui. Proin neque lorem, condimentum eu lacus ac, facilisis egestas lacus. Nunc fermentum sagittis tellus, eget varius augue sollicitudin vel. Sed gravida ultrices vulputate.</p><p class=\"ql-align-justify\">Proin a hendrerit orci. Maecenas ultricies leo a diam porttitor imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at dui ut felis tincidunt facilisis. Sed interdum arcu ut arcu pharetra vehicula. Duis laoreet congue enim sit amet ullamcorper. Praesent dignissim ligula ut nibh auctor, vitae fringilla odio mattis.</p><p class=\"ql-align-justify\">Sed nulla lorem, tincidunt sit amet imperdiet nec, dapibus sed nulla. Ut eu condimentum elit, vitae consequat diam. Nunc eget dolor ac velit condimentum varius id in ipsum. Ut ultricies mollis diam et consectetur. Praesent ornare sapien lorem, eget condimentum mi iaculis at. Aliquam erat volutpat. Ut aliquam odio sed mattis tincidunt. Pellentesque ac sapien ac tellus pretium volutpat a consectetur lacus. Aenean blandit nulla imperdiet blandit ultrices. Sed faucibus tristique felis sed laoreet. Suspendisse et vulputate dui, ac consectetur eros. Integer elementum dapibus urna, id accumsan dolor fermentum id. Aenean id urna malesuada ligula venenatis venenatis iaculis ac felis.</p><p class=\"ql-align-justify\">Donec hendrerit erat eget tincidunt finibus. Cras lacus odio, luctus sed elit non, pretium efficitur neque. Integer nec nunc sapien. Donec eu velit enim. Curabitur tincidunt lectus in tincidunt mollis. Donec ultrices dui augue, eu pulvinar arcu ultrices ac. Suspendisse eget neque nec orci mattis maximus at ut arcu. Vivamus leo ex, luctus eget lacus eget, rutrum condimentum massa. Vestibulum pulvinar ullamcorper erat eu tincidunt. Donec purus ante, auctor sit amet placerat sed, viverra ut leo. Aenean tristique massa non sodales viverra.</p><p class=\"ql-align-justify\">Quisque ac commodo eros. Etiam id ultricies mauris. Nam urna ex, viverra eu felis id, sodales tincidunt ipsum. Nulla pharetra in mauris fermentum convallis. Proin velit neque, consequat quis nunc nec, rutrum sollicitudin ipsum. Sed consequat rutrum commodo. Etiam tincidunt tellus vel leo euismod imperdiet. Suspendisse tempus sed tortor eget sollicitudin. Morbi feugiat, leo non euismod maximus, purus erat bibendum dui, ac fermentum arcu magna id tortor. Mauris mi ante, gravida non ex ut, venenatis ullamcorper nunc. Quisque feugiat justo ut lacus mattis aliquam. Curabitur euismod tincidunt turpis. Integer rutrum, nunc eu iaculis condimentum, massa odio facilisis velit, ut volutpat eros nisi ut risus. Nullam faucibus metus dolor, ut aliquet turpis condimentum non. Aliquam sit amet urna neque. Praesent facilisis blandit tincidunt.</p><p><br></p>', 0, '2025-04-19 13:54:32'),
@@ -676,6 +708,7 @@ INSERT INTO `page` (`id`, `slug`, `title`, `image`, `content`, `permanent`, `cre
 -- Table structure for table `partners`
 --
 
+DROP TABLE IF EXISTS `partners`;
 CREATE TABLE `partners` (
   `id` int(11) NOT NULL,
   `filename` varchar(250) DEFAULT NULL,
@@ -686,7 +719,7 @@ CREATE TABLE `partners` (
 -- Dumping data for table `partners`
 --
 
-INSERT INTO `partners` (`id`, `filename`, `createdAt`) VALUES
+INSERT IGNORE INTO `partners` (`id`, `filename`, `createdAt`) VALUES
 (43, '5l2kFGpo9l8qHmn1bhyOVpI2X0ChdHQy.png', '2024-04-06 10:50:48'),
 (44, 'C5K9ldid2VbQzGN0FJn7RmYvAldBYTp0.png', '2024-04-06 10:50:52'),
 (45, 'sicqacUYe65Ja4uQpqneMb9OHFSvgEwW.png', '2024-04-06 10:50:55'),
@@ -702,6 +735,7 @@ INSERT INTO `partners` (`id`, `filename`, `createdAt`) VALUES
 -- Table structure for table `phonebook`
 --
 
+DROP TABLE IF EXISTS `phonebook`;
 CREATE TABLE `phonebook` (
   `id` int(11) NOT NULL,
   `name` varchar(250) DEFAULT NULL,
@@ -715,6 +749,7 @@ CREATE TABLE `phonebook` (
 -- Table structure for table `plan`
 --
 
+DROP TABLE IF EXISTS `plan`;
 CREATE TABLE `plan` (
   `id` int(11) NOT NULL,
   `title` varchar(250) DEFAULT NULL,
@@ -738,7 +773,7 @@ CREATE TABLE `plan` (
 -- Dumping data for table `plan`
 --
 
-INSERT INTO `plan` (`id`, `title`, `short_description`, `allow_tag`, `allow_note`, `allow_chatbot`, `contact_limit`, `allow_api`, `is_trial`, `price`, `price_strike`, `plan_duration_in_days`, `createdAt`, `qr_account`, `wa_warmer`, `rest_api_qr`) VALUES
+INSERT IGNORE INTO `plan` (`id`, `title`, `short_description`, `allow_tag`, `allow_note`, `allow_chatbot`, `contact_limit`, `allow_api`, `is_trial`, `price`, `price_strike`, `plan_duration_in_days`, `createdAt`, `qr_account`, `wa_warmer`, `rest_api_qr`) VALUES
 (17, 'Trial', 'This is a trial plan with all the featrues', 1, 1, 1, '100', 1, 1, 0, NULL, '10', '2025-04-19 13:50:55', 10, 1, 1),
 (19, 'Premium', 'This ia one-year plan best for small agencies', 1, 1, 1, '100', 1, 0, 499, '299', '365', '2025-04-19 13:52:15', 10, 1, 1),
 (20, 'Platinum', 'This plan comes with the one-year validity and cover everything', 1, 1, 1, '10000', 1, 0, 1899, '699', '365', '2025-04-19 13:52:57', 24, 1, 1);
@@ -749,6 +784,7 @@ INSERT INTO `plan` (`id`, `title`, `short_description`, `allow_tag`, `allow_note
 -- Table structure for table `quick_reply`
 --
 
+DROP TABLE IF EXISTS `quick_reply`;
 CREATE TABLE `quick_reply` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -762,6 +798,7 @@ CREATE TABLE `quick_reply` (
 -- Table structure for table `rooms`
 --
 
+DROP TABLE IF EXISTS `rooms`;
 CREATE TABLE `rooms` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -775,6 +812,7 @@ CREATE TABLE `rooms` (
 -- Table structure for table `smtp`
 --
 
+DROP TABLE IF EXISTS `smtp`;
 CREATE TABLE `smtp` (
   `id` int(11) NOT NULL,
   `email` varchar(250) DEFAULT NULL,
@@ -789,7 +827,7 @@ CREATE TABLE `smtp` (
 -- Dumping data for table `smtp`
 --
 
-INSERT INTO `smtp` (`id`, `email`, `host`, `port`, `password`, `createdAt`, `username`) VALUES
+INSERT IGNORE INTO `smtp` (`id`, `email`, `host`, `port`, `password`, `createdAt`, `username`) VALUES
 (1, 'email@smtp.com', 'email@smtp.com', '587', 'password', '2024-02-28 16:44:12', 'email@smtp.com');
 
 -- --------------------------------------------------------
@@ -798,6 +836,7 @@ INSERT INTO `smtp` (`id`, `email`, `host`, `port`, `password`, `createdAt`, `use
 -- Table structure for table `telegram_session`
 --
 
+DROP TABLE IF EXISTS `telegram_session`;
 CREATE TABLE `telegram_session` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) NOT NULL,
@@ -817,6 +856,7 @@ CREATE TABLE `telegram_session` (
 -- Table structure for table `templets`
 --
 
+DROP TABLE IF EXISTS `templets`;
 CREATE TABLE `templets` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -832,6 +872,7 @@ CREATE TABLE `templets` (
 -- Table structure for table `testimonial`
 --
 
+DROP TABLE IF EXISTS `testimonial`;
 CREATE TABLE `testimonial` (
   `id` int(11) NOT NULL,
   `title` varchar(250) DEFAULT NULL,
@@ -845,7 +886,7 @@ CREATE TABLE `testimonial` (
 -- Dumping data for table `testimonial`
 --
 
-INSERT INTO `testimonial` (`id`, `title`, `description`, `reviewer_name`, `reviewer_position`, `createdAt`) VALUES
+INSERT IGNORE INTO `testimonial` (`id`, `title`, `description`, `reviewer_name`, `reviewer_position`, `createdAt`) VALUES
 (1, '“Highly customisable and friendly\"', 'We work in the hotel business, so keeping in touch with people travelling is very easy using WhatsApp. WhatsCRm help us to have multiple people answering guests. It also allows us to automate basic replies such as the address', 'Eduardo Zeballos', 'CEO', '2024-02-27 14:12:05'),
 (3, '\"Cutting-edge and Intuitive Communication Solution\"', '\"At our design studio, effective communication is key to delivering exceptional results for our clients. WhatsCRm has revolutionized our workflow by streamlining communication channels and allowing our team to collaborate seamlessly. With its intuitive interface and customizable features, we can effortlessly manage client inquiries, share project updates, and ensure timely responses. WhatsCRm has become an indispensable tool for enhancing productivity and client satisfaction.\"', 'Sophia Chen', 'Creative Director', '2024-03-01 15:44:21'),
 (4, '\"Efficient and Versatile Messaging Platform\"', '\n\"Efficient and Versatile Messaging Platform\"\n\n\"Being in the real estate industry demands constant communication with clients and prospects. WhatsCRm has been a game-changer for our agency, providing us with an efficient and versatile messaging platform. We can easily organize client conversations, schedule property viewings, and follow up on leads all in one place. Its user-friendly interface and robust features have significantly boosted our team\'s productivity and client engagement.\"', 'Jonathan Rodriguez', 'Real Estate Agent', '2024-03-01 15:45:07');
@@ -856,6 +897,7 @@ INSERT INTO `testimonial` (`id`, `title`, `description`, `reviewer_name`, `revie
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `role` varchar(250) DEFAULT 'user',
@@ -879,6 +921,7 @@ CREATE TABLE `user` (
 -- Table structure for table `warmers`
 --
 
+DROP TABLE IF EXISTS `warmers`;
 CREATE TABLE `warmers` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -893,6 +936,7 @@ CREATE TABLE `warmers` (
 -- Table structure for table `warmer_script`
 --
 
+DROP TABLE IF EXISTS `warmer_script`;
 CREATE TABLE `warmer_script` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -904,7 +948,7 @@ CREATE TABLE `warmer_script` (
 -- Dumping data for table `warmer_script`
 --
 
-INSERT INTO `warmer_script` (`id`, `uid`, `message`, `createdAt`) VALUES
+INSERT IGNORE INTO `warmer_script` (`id`, `uid`, `message`, `createdAt`) VALUES
 (1, 'lWvj6K0xI0FlSKJoyV7ak9DN0mzvKJK8', 'hey there', '2025-04-15 10:49:48'),
 (2, 'lWvj6K0xI0FlSKJoyV7ak9DN0mzvKJK8', 'hey there', '2025-04-15 10:49:50'),
 (4, 'lWvj6K0xI0FlSKJoyV7ak9DN0mzvKJK8', 'hey', '2025-04-15 11:04:30'),
@@ -923,6 +967,7 @@ INSERT INTO `warmer_script` (`id`, `uid`, `message`, `createdAt`) VALUES
 -- Table structure for table `wa_call_bot`
 --
 
+DROP TABLE IF EXISTS `wa_call_bot`;
 CREATE TABLE `wa_call_bot` (
   `id` int(11) NOT NULL,
   `uid` varchar(250) DEFAULT NULL,
@@ -939,6 +984,7 @@ CREATE TABLE `wa_call_bot` (
 -- Table structure for table `wa_call_broadcasts`
 --
 
+DROP TABLE IF EXISTS `wa_call_broadcasts`;
 CREATE TABLE `wa_call_broadcasts` (
   `id` int(11) NOT NULL,
   `uid` varchar(255) NOT NULL,
@@ -972,6 +1018,7 @@ CREATE TABLE `wa_call_broadcasts` (
 -- Table structure for table `wa_call_flows`
 --
 
+DROP TABLE IF EXISTS `wa_call_flows`;
 CREATE TABLE `wa_call_flows` (
   `id` int(11) NOT NULL,
   `is_active` int(11) DEFAULT 1,
@@ -989,6 +1036,7 @@ CREATE TABLE `wa_call_flows` (
 -- Table structure for table `wa_call_logs`
 --
 
+DROP TABLE IF EXISTS `wa_call_logs`;
 CREATE TABLE `wa_call_logs` (
   `id` int(11) NOT NULL,
   `uid` varchar(255) NOT NULL,
@@ -1011,6 +1059,7 @@ CREATE TABLE `wa_call_logs` (
 -- Table structure for table `webhooks`
 --
 
+DROP TABLE IF EXISTS `webhooks`;
 CREATE TABLE `webhooks` (
   `id` int(11) NOT NULL,
   `uid` varchar(255) NOT NULL,
@@ -1028,7 +1077,7 @@ CREATE TABLE `webhooks` (
 -- Dumping data for table `webhooks`
 --
 
-INSERT INTO `webhooks` (`id`, `uid`, `name`, `description`, `method`, `secret`, `webhook_id`, `is_active`, `created_at`, `updated_at`) VALUES
+INSERT IGNORE INTO `webhooks` (`id`, `uid`, `name`, `description`, `method`, `secret`, `webhook_id`, `is_active`, `created_at`, `updated_at`) VALUES
 (5, 'lWvj6K0xI0FlSKJoyV7ak9DN0mzvKJK8', 'woocommerce', 'this is for woo order update', 'POST', NULL, 'IGaUVF', 1, '2025-06-28 13:54:38', '2025-06-28 13:54:38'),
 (6, 'lWvj6K0xI0FlSKJoyV7ak9DN0mzvKJK8', 'Shopify webhook', 'this is for shopify webhook', 'POST', NULL, 'X6TgmQ', 1, '2025-06-28 14:04:13', '2025-06-28 14:04:13'),
 (7, 'EeBzgZP5V0bs9UL5k7sx6H6ykIafrqZp', 'Test', 'Testing ', 'POST', NULL, '0Eh4gm', 1, '2025-12-08 06:11:21', '2025-12-08 06:11:41'),
@@ -1040,6 +1089,7 @@ INSERT INTO `webhooks` (`id`, `uid`, `name`, `description`, `method`, `secret`, 
 -- Table structure for table `webhook_logs`
 --
 
+DROP TABLE IF EXISTS `webhook_logs`;
 CREATE TABLE `webhook_logs` (
   `id` int(11) NOT NULL,
   `uid` varchar(255) NOT NULL,
@@ -1058,6 +1108,7 @@ CREATE TABLE `webhook_logs` (
 -- Table structure for table `web_private`
 --
 
+DROP TABLE IF EXISTS `web_private`;
 CREATE TABLE `web_private` (
   `id` int(11) NOT NULL,
   `pay_offline_id` varchar(250) DEFAULT NULL,
@@ -1089,7 +1140,7 @@ CREATE TABLE `web_private` (
 -- Dumping data for table `web_private`
 --
 
-INSERT INTO `web_private` (`id`, `pay_offline_id`, `pay_offline_key`, `offline_active`, `pay_stripe_id`, `pay_stripe_key`, `stripe_active`, `createdAt`, `pay_paypal_id`, `pay_paypal_key`, `paypal_active`, `rz_id`, `rz_key`, `rz_active`, `pay_paystack_id`, `pay_paystack_key`, `paystack_active`, `qr_storage`, `mongodb_string`, `embed_app_sec`, `embed_app_id`, `embed_app_config`, `teleAppId`, `teleHash`) VALUES
+INSERT IGNORE INTO `web_private` (`id`, `pay_offline_id`, `pay_offline_key`, `offline_active`, `pay_stripe_id`, `pay_stripe_key`, `stripe_active`, `createdAt`, `pay_paypal_id`, `pay_paypal_key`, `paypal_active`, `rz_id`, `rz_key`, `rz_active`, `pay_paystack_id`, `pay_paystack_key`, `paystack_active`, `qr_storage`, `mongodb_string`, `embed_app_sec`, `embed_app_id`, `embed_app_config`, `teleAppId`, `teleHash`) VALUES
 (1, 'Pay offline', 'Pay offline on this account number xxxxxxxxx\nand send a screenshot to us on this email xxx@xxx.com', 1, 'xxxxxxxxxxxxxxxxx', 'xxxxxxxxxxxxxxxxx', 1, '2024-02-26 17:06:06', 'AfNGna9GM7u9H-WnMC-3eCKzOQwCBcLdmiMTswtIrpkEWeYuju6h6gk2STlBdmYNE52nWPnAvEZH-6Uu', 'ENwh2FQOJVFlJ2i360zWmHCWqQDIQBjz0opCok4kuD8AcTDNrk4PpkIKLdrGznu-hIu1UdNQV0oFZO1C', '1', 'xxxxxxxxxxxxxxxxx', 'xxxxxxxxxxxxxxxxx', '1', NULL, NULL, NULL, 'local', 'mongodb+srv://wacrm:jaYO24C2TJZTkao5@sessions.cgiss4u.mongodb.net/?retryWrites=true&w=majority&appName=sessions', '234729cb8fe33877342539f47ddca33e', '1533489467877260', '1631983291575709', '31473169', '1267a0139190705dfc7808724a643bec');
 
 -- --------------------------------------------------------
@@ -1098,6 +1149,7 @@ INSERT INTO `web_private` (`id`, `pay_offline_id`, `pay_offline_key`, `offline_a
 -- Table structure for table `web_public`
 --
 
+DROP TABLE IF EXISTS `web_public`;
 CREATE TABLE `web_public` (
   `id` int(11) NOT NULL,
   `currency_code` varchar(250) DEFAULT NULL,
@@ -1122,7 +1174,7 @@ CREATE TABLE `web_public` (
 -- Dumping data for table `web_public`
 --
 
-INSERT INTO `web_public` (`id`, `currency_code`, `logo`, `app_name`, `custom_home`, `is_custom_home`, `meta_description`, `currency_symbol`, `chatbot_screen_tutorial`, `broadcast_screen_tutorial`, `home_page_tutorial`, `login_header_footer`, `exchange_rate`, `google_client_id`, `google_login_active`, `rtl`, `other`) VALUES
+INSERT IGNORE INTO `web_public` (`id`, `currency_code`, `logo`, `app_name`, `custom_home`, `is_custom_home`, `meta_description`, `currency_symbol`, `chatbot_screen_tutorial`, `broadcast_screen_tutorial`, `home_page_tutorial`, `login_header_footer`, `exchange_rate`, `google_client_id`, `google_login_active`, `rtl`, `other`) VALUES
 (1, 'EUR', 'FOJPDz2ggPeya6yDTBfhkKtxkubH05WZ.png', 'whatsCRM', 'https://google.com', 0, 'des updated', '$', 'https://youtu.be/Wg_23HLxdHc?si=yv5aIMY1OsnwUrNy', 'https://youtu.be/Wg_23HLxdHc?si=yv5aIMY1OsnwUrNy', 'https://youtu.be/rFNoXYE_efo', 1, '1', 'xxxxxxxxxxxxxxx', 0, 0, '0');
 
 --
