@@ -24,7 +24,6 @@ async function createSession(id, title) {
 
     const sock = makeWASocket({
       auth: state,
-      printQRInTerminal: true,
       logger: pino({ level: "silent" })
     });
 
@@ -42,7 +41,7 @@ async function createSession(id, title) {
         if (qr) {
           console.log("QR Generated for", id);
           const qrBase64 = await toDataURL(qr);
-          await query("UPDATE instance SET data = ?, status = ? WHERE uniqueId = ?", [qrBase64, "QR", id]);
+          await query("UPDATE instance SET qr = ?, data = ?, status = ? WHERE uniqueId = ?", [qrBase64, qrBase64, "QR", id]);
           try {
             sendToUid(instance.uid, { type: "qr", qr: qrBase64 }, "qr");
             sendToUid(instance.uid, { uniqueId: id, qr: qrBase64 }, "update_instance");

@@ -296,7 +296,14 @@ router.post("/change_instance_status", validateUser, async (req, res) => {
 
     const finalUpdate = { onlineStatus: status };
 
-    await session.sendPresenceUpdate(status);
+    try {
+      if (session?.user?.id) {
+        await session.sendPresenceUpdate(status);
+      }
+    } catch (e) {
+      console.log("Ignored sendPresenceUpdate error:", e.message);
+    }
+
     await query(`UPDATE instance SET other = ? WHERE uniqueId = ?`, [
       JSON.stringify(finalUpdate),
       insId,
