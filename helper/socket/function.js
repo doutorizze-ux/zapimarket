@@ -482,17 +482,38 @@ async function sendQrMsg({ uid, to, msgObj, chatInfo }) {
 
     // getting session
     console.log("chatInfo.chat_id:", chatInfo?.chat_id);
-    const sessionId = await getSessionIdFromChatIdQr(chatInfo?.chat_id);
-    console.log("sessionId resolved:", sessionId);
 
     const {
       getSession,
+      getSessionByPhoneNumber,
       formatGroup,
       formatPhone,
     } = require("../../helper/addon/qr");
 
-    // extracting session from local
-    const session = await timeoutPromise(getSession(sessionId || "a"), 60000);
+    let session = null;
+    let sessionId = "na";
+
+    // Standard extract from chat_id
+    const obj = extractObjFromChatId(chatInfo?.chat_id || "");
+    console.log("extractObjFromChatId parsed from number:", obj ? obj.fromNumber : "null");
+
+    if (obj && obj.fromNumber) {
+       const found = getSessionByPhoneNumber(obj.fromNumber);
+       if (found) {
+          session = found.sock;
+          sessionId = found.id;
+          console.log("Found session from memory by number matching! ID:", sessionId);
+       }
+    }
+
+    if (!session) {
+       console.log("Falling back to Database session lookup for chat_id:", chatInfo?.chat_id);
+       const dbSessionId = await getSessionIdFromChatIdQr(chatInfo?.chat_id);
+       sessionId = dbSessionId;
+       console.log("sessionId resolved from DB:", sessionId);
+       session = await timeoutPromise(getSession(sessionId || "a"), 60000);
+    }
+
     if (!session) {
       return { success: false, msg: "Session not found locally" };
     }

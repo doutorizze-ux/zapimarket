@@ -136,6 +136,18 @@ async function createSession(id, title) {
 
 const getSession = (id) => sessions.get(id);
 
+const getSessionByPhoneNumber = (number) => {
+  for (const [id, sock] of sessions.entries()) {
+    if (sock && sock.user && sock.user.id) {
+       const userNumber = sock.user.id.split(":")[0];
+       if (userNumber === number) {
+          return { id, sock };
+       }
+    }
+  }
+  return null;
+};
+
 const deleteSession = async (id) => {
   const sock = sessions.get(id);
   if (sock) {
@@ -212,5 +224,6 @@ module.exports = {
   downloadMediaMessage,
   checkQr,
   generateProfilePicture,
-  getStorageConfig
+  getStorageConfig,
+  getSessionByPhoneNumber
 };
