@@ -117,8 +117,16 @@ app.get("*", function (request, response) {
   response.sendFile(path.resolve(currentDir, "./client/public", "index.html"));
 });
 
-const server = app.listen(process.env.PORT || 3010, () => {
+const server = app.listen(process.env.PORT || 3010, async () => {
   console.log(`WaCrm server is running on port ${process.env.PORT}`);
+  
+  try {
+    const { checkAndCreateTables } = require("./init_db_fix");
+    await checkAndCreateTables();
+  } catch (e) {
+    console.error("Failed to execute database creation fix", e);
+  }
+
   init();
   setTimeout(() => {
     warmerLoopInit();
