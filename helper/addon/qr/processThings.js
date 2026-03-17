@@ -237,6 +237,14 @@ async function saveMessageToConversation({ uid, chatId, messageData }) {
 async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
   try {
     if (!body) return null;
+    
+    // Unwrap View Once wrappers
+    if (body.message?.viewOnceMessage?.message) {
+      body.message = body.message.viewOnceMessage.message;
+    }
+    if (body.message?.viewOnceMessageV2?.message) {
+      body.message = body.message.viewOnceMessageV2.message;
+    }
 
     // Status Update Handling
     if (body.update && typeof body.update.status === "number") {
@@ -399,6 +407,17 @@ async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
       if (doc.contextInfo?.quotedMessage) {
         referencedMessageData = doc.contextInfo.quotedMessage;
       }
+    } else if (body.message.stickerMessage) {
+      const sticker = body.message.stickerMessage;
+      const downloadResult = await downloadMediaPromise(body, sticker.mimetype);
+      msgContext = {
+        type: "sticker",
+        sticker: {
+          link: `${process.env.FRONTENDURI}/meta-media/${
+            downloadResult.success ? downloadResult.fileName : ""
+          }`,
+        },
+      };
     } else {
       console.warn("Unsupported message type in Baileys webhook");
       return null;
