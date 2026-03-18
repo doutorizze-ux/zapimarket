@@ -111,11 +111,12 @@ async function updateChatInMysql({
     }
 
     if (chat) {
+      // Use COALESCE in SQL to avoid overwriting good data with "NA"
       await query(
         `UPDATE beta_chats 
          SET last_message = ?, 
-             sender_name = ?, 
-             sender_mobile = ?, 
+             sender_name = CASE WHEN ? = 'NA' THEN sender_name ELSE ? END, 
+             sender_mobile = CASE WHEN ? = 'NA' THEN sender_mobile ELSE ? END, 
              origin = ?, 
              origin_instance_id = ?
              ${unread_count > 0 ? ", unread_count = ?" : ""}
@@ -123,8 +124,10 @@ async function updateChatInMysql({
         unread_count > 0
           ? [
               last_message,
-              sender_name,
-              sender_mobile,
+              sender_name, // for CASE rule element 1
+              sender_name, // for CASE rule element 2
+              sender_mobile, // for CASE rule element 1
+              sender_mobile, // for CASE rule element 2
               origin,
               origin_instance_id,
               unread_count,
@@ -134,6 +137,8 @@ async function updateChatInMysql({
           : [
               last_message,
               sender_name,
+              sender_name,
+              sender_mobile,
               sender_mobile,
               origin,
               origin_instance_id,
