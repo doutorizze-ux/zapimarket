@@ -706,9 +706,41 @@ async function sendWaMessage({
       if (!session) {
         sendMsgId = null;
       } else {
-        const jid = isGroup
-          ? formatGroup(message.senderMobile)
-          : formatPhone(message.senderMobile);
+        let jid = formatPhone(message.senderMobile);
+
+        if (message.senderMobile.startsWith("12036") || isGroup) {
+          jid = formatGroup(message.senderMobile);
+          console.log("Chatbot routing target into Group:", jid);
+        } else if (message.senderMobile.length >= 15 && !message.senderMobile.startsWith("12036")) {
+          let resolvedLid = false;
+
+          // Address Book Fallback for Chatbot
+          if (message.senderName && message.senderName !== "NA" && uid) {
+            try {
+              const [foundContact] = await query(
+                "SELECT mobile FROM contact WHERE name = ? AND uid = ? LIMIT 1",
+                [message.senderName, uid]
+              );
+              if (foundContact && foundContact.mobile) {
+                const numericMob = foundContact.mobile.replace(/\D/g, "");
+                if (numericMob.length > 8) {
+                  jid = formatPhone(numericMob);
+                  resolvedLid = true;
+                  console.log("Chatbot resolved LID to Real PN using Address Book for:", message.senderName, "->", jid);
+                }
+              }
+            } catch (e) {
+              console.error("Chatbot Address Book lookup error:", e);
+            }
+          }
+
+          if (!resolvedLid) {
+            if (!message.senderMobile.endsWith("@lid")) {
+               jid = `${message.senderMobile}@lid`;
+            }
+            console.log("Chatbot routing target into LID:", jid);
+          }
+        }
 
         const send = await timeoutPromise(
           session?.sendMessage(jid, convertMsgToQR),
@@ -737,9 +769,41 @@ async function sendWaMessage({
       if (!session) {
         sendMsgId = null;
       } else {
-        const jid = isGroup
-          ? formatGroup(message.senderMobile)
-          : formatPhone(message.senderMobile);
+        let jid = formatPhone(message.senderMobile);
+
+        if (message.senderMobile.startsWith("12036") || isGroup) {
+          jid = formatGroup(message.senderMobile);
+          console.log("Chatbot webhook routing target into Group:", jid);
+        } else if (message.senderMobile.length >= 15 && !message.senderMobile.startsWith("12036")) {
+          let resolvedLid = false;
+
+          // Address Book Fallback for Chatbot Webhook
+          if (message.senderName && message.senderName !== "NA" && uid) {
+            try {
+              const [foundContact] = await query(
+                "SELECT mobile FROM contact WHERE name = ? AND uid = ? LIMIT 1",
+                [message.senderName, uid]
+              );
+              if (foundContact && foundContact.mobile) {
+                const numericMob = foundContact.mobile.replace(/\D/g, "");
+                if (numericMob.length > 8) {
+                  jid = formatPhone(numericMob);
+                  resolvedLid = true;
+                  console.log("Chatbot Webhook resolved LID to Real PN using Address Book for:", message.senderName, "->", jid);
+                }
+              }
+            } catch (e) {
+              console.error("Chatbot Webhook Address Book lookup error:", e);
+            }
+          }
+
+          if (!resolvedLid) {
+            if (!message.senderMobile.endsWith("@lid")) {
+               jid = `${message.senderMobile}@lid`;
+            }
+            console.log("Chatbot Webhook routing target into LID:", jid);
+          }
+        }
 
         const send = await timeoutPromise(
           session?.sendMessage(jid, convertMsgToQR),
