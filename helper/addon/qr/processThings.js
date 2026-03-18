@@ -246,6 +246,10 @@ async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
       body.message = body.message.viewOnceMessageV2.message;
     }
 
+    // Safeguard: Skip loading heavy media for historical sync messages (older than 2 minutes)
+    // to prevent WebSocket stream error (Reason 515) due to bandwidth flooding on startup.
+    const isHistorical = (Date.now() / 1000 - (body.messageTimestamp || Date.now() / 1000)) > 120;
+
     // Status Update Handling
     if (body.update && typeof body.update.status === "number") {
       if (!body.key?.fromMe) {
@@ -317,7 +321,10 @@ async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
       }
     } else if (body.message.imageMessage) {
       const img = body.message.imageMessage;
-      const downloadResult = await downloadMediaPromise(body, img.mimetype);
+      let downloadResult = { success: false };
+      if (!isHistorical) {
+         downloadResult = await downloadMediaPromise(body, img.mimetype);
+      }
       msgContext = {
         type: "image",
         image: {
@@ -329,7 +336,10 @@ async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
       };
     } else if (body.message.videoMessage) {
       const vid = body.message.videoMessage;
-      const downloadResult = await downloadMediaPromise(body, vid.mimetype);
+      let downloadResult = { success: false };
+      if (!isHistorical) {
+         downloadResult = await downloadMediaPromise(body, vid.mimetype);
+      }
       msgContext = {
         type: "video",
         video: {
@@ -350,7 +360,10 @@ async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
       };
     } else if (body.message.audioMessage) {
       const aud = body.message.audioMessage;
-      const downloadResult = await downloadMediaPromise(body, aud.mimetype);
+      let downloadResult = { success: false };
+      if (!isHistorical) {
+         downloadResult = await downloadMediaPromise(body, aud.mimetype);
+      }
       msgContext = {
         type: "audio",
         audio: {
@@ -372,13 +385,16 @@ async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
     } else if (body.message.documentWithCaptionMessage) {
       const doc =
         body.message.documentWithCaptionMessage.message.documentMessage;
-      const downloadResult = await downloadMediaPromise(
-        body,
-        body?.message?.documentWithCaptionMessage?.message?.documentMessage?.mimetype?.replace(
-          "application/x-javascript",
-          "application/javascript"
-        )
-      );
+      let downloadResult = { success: false };
+      if (!isHistorical) {
+        downloadResult = await downloadMediaPromise(
+          body,
+          body?.message?.documentWithCaptionMessage?.message?.documentMessage?.mimetype?.replace(
+            "application/x-javascript",
+            "application/javascript"
+          )
+        );
+      }
       msgContext = {
         type: "document",
         document: {
@@ -394,7 +410,10 @@ async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
     } else if (body.message.documentMessage) {
       // Handle regular document messages without caption
       const doc = body.message.documentMessage;
-      const downloadResult = await downloadMediaPromise(body, doc.mimetype);
+      let downloadResult = { success: false };
+      if (!isHistorical) {
+         downloadResult = await downloadMediaPromise(body, doc.mimetype);
+      }
       msgContext = {
         type: "document",
         document: {
@@ -409,7 +428,10 @@ async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
       }
     } else if (body.message.stickerMessage) {
       const sticker = body.message.stickerMessage;
-      const downloadResult = await downloadMediaPromise(body, sticker.mimetype);
+      let downloadResult = { success: false };
+      if (!isHistorical) {
+         downloadResult = await downloadMediaPromise(body, sticker.mimetype);
+      }
       msgContext = {
         type: "sticker",
         sticker: {
