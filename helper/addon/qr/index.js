@@ -111,21 +111,18 @@ async function createSession(id, title) {
         // Ignore Status/Stories updates to save bandwidth and keep inbox clean
         if (msg.key?.remoteJid === "status@broadcast") return;
         
-        // Pass to processThings.js
-        const { processMessageQr } = require("./processThings");
+        // Pass to inbox.js to trigger Socket and Chatbot Automations
+        const { processMessage } = require("../../inbox/inbox");
         const [instance] = await query("SELECT * FROM instance WHERE uniqueId = ?", [id]);
         if (instance) {
-          const [userData] = await query("SELECT * FROM user WHERE uid = ?", [instance.uid]);
-          if(userData) {
-             processMessageQr({
-               type: "qr",
-               message: msg,
-               sessionId: id,
-               getSession: async () => sock,
-               userData,
-               uid: instance.uid
-             });
-          }
+           processMessage({
+             body: msg,
+             uid: instance.uid,
+             origin: "qr",
+             getSession: async () => sock,
+             sessionId: id,
+             qrType: "qr"
+           }).catch(e => console.error("Error in processMessage trigger:", e));
         }
       } catch(e) {}
     });
