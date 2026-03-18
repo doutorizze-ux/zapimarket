@@ -467,9 +467,8 @@ async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
         userFromMysql?.timezone || body.messageTimestamp
       ),
       senderName: body.pushName || "NA",
-      senderMobile: body.key.remoteJid
-        ? body.key.remoteJid.split("@")[0]
-        : "NA",
+      senderMobile: (body.key?.participant || body.key?.remoteJid || "NA")
+        .split("@")[0],
       status: "",
       star: false,
       route: body.key?.fromMe ? "OUTGOING" : "INCOMING",
