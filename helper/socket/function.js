@@ -535,11 +535,35 @@ async function sendQrMsg({ uid, to, msgObj, chatInfo }) {
     } 
     // Auto-detect LID accounts (typically length 15 and above, not group codes)
     else if (to.length >= 15 && !to.startsWith("12036")) {
-      // Create @lid domain absolute reference for WhatsApp privacy accounts
-      if (!to.endsWith("@lid")) {
-        jid = to.includes("@") ? to : `${to}@lid`;
+      let resolvedLid = false;
+
+      // Fallback: Try to solve LID to Real Number lookup using the local CRM Address Book (Contact list)
+      if (chatInfo?.sender_name && chatInfo.sender_name !== "NA" && chatInfo.uid) {
+         try {
+           const [foundContact] = await query(
+             "SELECT mobile FROM contact WHERE name = ? AND uid = ? LIMIT 1", 
+             [chatInfo.sender_name, chatInfo.uid]
+           );
+           if (foundContact && foundContact.mobile) {
+              const numericMob = foundContact.mobile.replace(/\D/g, "");
+              if (numericMob.length > 8) {
+                 jid = formatPhone(numericMob);
+                 resolvedLid = true;
+                 console.log("Resolved LID back to Real Phone Number using Address Book fallback for:", chatInfo.sender_name, "->", jid);
+              }
+           }
+         } catch (e) {
+           console.error("Address book LID lookup error:", e);
+         }
       }
-      console.log("Force converting target into LID JID structure:", jid);
+
+      if (!resolvedLid) {
+         // Create @lid domain absolute reference for WhatsApp privacy accounts
+         if (!to.endsWith("@lid")) {
+           jid = to.includes("@") ? to : `${to}@lid`;
+         }
+         console.log("Force converting target into LID JID structure:", jid);
+      }
     }
 
     // console.log({ qrObj, jid });
