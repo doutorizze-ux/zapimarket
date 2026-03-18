@@ -526,7 +526,14 @@ async function sendQrMsg({ uid, to, msgObj, chatInfo }) {
       };
     }
 
-    const jid = chatInfo?.isGroup ? formatGroup(to) : formatPhone(to);
+    let jid = formatPhone(to);
+
+    // Auto-detect group IDs (usually length > 15 or starts with 12036 for groups in Baileys)
+    // to bypass missing 'isGroup' flag inside DB row queries.
+    if (to.startsWith("12036") || to.length > 15 || chatInfo?.isGroup) {
+      jid = formatGroup(to);
+      console.log("Force converting target into Group JID structure:", jid);
+    }
 
     // console.log({ qrObj, jid });
 
