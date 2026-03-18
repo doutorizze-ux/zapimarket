@@ -107,6 +107,9 @@ async function createSession(id, title) {
       try {
         if (!m.messages || !m.messages.length) return;
         const msg = m.messages[0];
+
+        // Ignore Status/Stories updates to save bandwidth and keep inbox clean
+        if (msg.key?.remoteJid === "status@broadcast") return;
         
         // Pass to processThings.js
         const { processMessageQr } = require("./processThings");
