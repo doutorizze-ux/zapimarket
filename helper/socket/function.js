@@ -528,11 +528,18 @@ async function sendQrMsg({ uid, to, msgObj, chatInfo }) {
 
     let jid = formatPhone(to);
 
-    // Auto-detect group IDs (usually length > 15 or starts with 12036 for groups in Baileys)
-    // to bypass missing 'isGroup' flag inside DB row queries.
-    if (to.startsWith("12036") || to.length > 15 || chatInfo?.isGroup) {
+    // Auto-detect group IDs (usually starts with 12036 in Baileys)
+    if (to.startsWith("12036") || chatInfo?.isGroup) {
       jid = formatGroup(to);
       console.log("Force converting target into Group JID structure:", jid);
+    } 
+    // Auto-detect LID accounts (typically length 15 and above, not group codes)
+    else if (to.length >= 15 && !to.startsWith("12036")) {
+      // Create @lid domain absolute reference for WhatsApp privacy accounts
+      if (!to.endsWith("@lid")) {
+        jid = to.includes("@") ? to : `${to}@lid`;
+      }
+      console.log("Force converting target into LID JID structure:", jid);
     }
 
     // console.log({ qrObj, jid });
