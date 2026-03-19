@@ -242,6 +242,11 @@ async function saveMessageToConversation({ uid, chatId, messageData }) {
 async function processBaileysMsg({ body, uid, userFromMysql, chatId }) {
   try {
     if (!body) return null;
+
+    // Ignore group messages (@g.us) to avoid displaying giant IDs in dashboard
+    if (body.key?.remoteJid?.endsWith("@g.us")) {
+      return { newMessage: null, chatId };
+    }
     
     // Unwrap View Once wrappers
     if (body.message?.viewOnceMessage?.message) {

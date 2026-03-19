@@ -783,6 +783,7 @@ async function saveMessage(body, uid, type, msgContext) {
     const chats = await query(`SELECT * FROM chats WHERE uid = ?`, [uid]);
 
     io.to(getId[0]?.socket_id).emit("update_conversations", { chats: chats });
+    io.to(getId[0]?.socket_id).emit("request_update_chat_list", { chatId: chatId });
 
     io.to(getId[0]?.socket_id).emit("push_new_msg", {
       msg: actualMsg,
@@ -814,6 +815,7 @@ async function saveMessage(body, uid, type, msgContext) {
       io.to(getAgentSocket[0]?.socket_id).emit("update_conversations", {
         chats: chatsNew || [],
       });
+      io.to(getAgentSocket[0]?.socket_id).emit("request_update_chat_list", { chatId: chatId });
 
       io.to(getAgentSocket[0]?.socket_id).emit("push_new_msg", {
         msg: actualMsg,
@@ -1298,15 +1300,15 @@ function addObjectToFile(object, filePath) {
 
 function convertNumberToRandomString(number) {
   const mapping = {
-    0: "i",
-    1: "j",
-    2: "I",
-    3: "u",
-    4: "I",
-    5: "U",
-    6: "S",
-    7: "D",
-    8: "B",
+    0: "a",
+    1: "b",
+    2: "c",
+    3: "d",
+    4: "e",
+    5: "f",
+    6: "g",
+    7: "h",
+    8: "i",
     9: "j",
   };
 
@@ -1532,6 +1534,8 @@ function updateMetaTempletInMsg(uid, savObj, chatId, msgId) {
         chats: chats,
         notificationOff: true,
       });
+
+      io.to(getId[0]?.socket_id).emit("request_update_chat_list", { chatId: chatId });
 
       io.to(getId[0]?.socket_id).emit("push_new_msg", {
         msg: finalSaveMsg,
